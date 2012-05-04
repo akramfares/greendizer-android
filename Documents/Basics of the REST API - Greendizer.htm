@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<!-- saved from url=(0036)https://www.greendizer.com/docs/api/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en" class=" js borderradius boxshadow textshadow opacity"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./Basics of the REST API - Greendizer_files/cb=gapi.loaded0" async=""></script><script type="text/javascript" async="" src="./Basics of the REST API - Greendizer_files/plusone.js" gapi_processed="true"></script><script type="text/javascript" async="" src="./Basics of the REST API - Greendizer_files/ga.js"></script><script type="text/javascript" async="" src="./Basics of the REST API - Greendizer_files/ga.js"></script><script type="text/javascript">
+//<![CDATA[
+try{if (!window.CloudFlare) { var CloudFlare=[{verbose:0,p:0,byc:0,owlid:0,mirage:0,oracle:"82/3f73793a7b7aa6a429141ec16904d2",paths:{cloudflare:"/cdn-cgi/nexp/v=1443929931/"},atok:"4e06fa8b804fb039e1f08e68ed044898",zone:"greendizer.com",rocket:"0",apps:{"ga_key":{"ua":"UA-23409453-4","ga_bs":"2"}}}];document.write('<script type="text/javascript" src="//ajax.cloudflare.com/cdn-cgi/nexp/v=3368044129/cloudflare.min.js"><'+'\/script>')}}catch(a){};
+//]]>
+</script><script type="text/javascript" src="./Basics of the REST API - Greendizer_files/cloudflare.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+window.__CF=window.__CF||{};window.__CF.AJS={"ga_key":{"ua":"UA-23409453-4","ga_bs":"2"}};
+//]]>
+</script>
+<title>Basics of the REST API - Greendizer</title>
+<script type="text/javascript">
+(function(){
+    try{ 
+        var contentLanguage = document.getElementsByTagName("html")[0].lang;
+        var cookieLocale;
+        
+        var urlMatch = window.location.href.match(new RegExp("\/([a-z]{2})\/", "i"));
+        var urlLocale = urlMatch ? urlMatch[1] : "en";
+        var browserLanguage = (window.navigator.language || 
+                               window.navigator.browserLanguage).split("-")[0];
+        
+        //Building a hash of the available alternates to the current page.
+        var alternates = {};
+        var links = document.getElementsByTagName("link");
+        for(var j=0; j < links.length; j++){
+            alternates[links[j].hreflang] = links[j].href;
+        }
+        
+        //Looking for the "locale" cookie.
+        var cookies = document.cookie.split("; ");
+        for(var i=0; i < cookies.length; i++){
+            var parts = cookies[i].split("=");
+            if(parts[0] === "locale"){
+                cookieLocale = parts[1];
+                
+                if(parts[1] === contentLanguage){
+                    /**
+                     * Ideal case: the page's language matched the preferred
+                     * language of the user according to the value carried
+                     * by the "locale" cookie. 
+                     */
+                    return;
+                } else if (parts[1] in alternates) {
+                    /**
+                     * Preferred language doesn't match the page's content language,
+                     * but an alternate is available. 
+                     */
+                    window.location.href = alternates[parts[1]];
+                }
+                break;
+            }
+        }       
+        
+        /*
+         * Case of a page loaded with from the cache,
+         * and no cookie could be written by the server.
+         */
+        if(!cookieLocale && 
+            contentLanguage === urlMatch &&
+            browserLanguage !== contentLanguage){
+            document.cookie = ["locale=" + contentLanguage,
+                               "Path=/",
+                               "Domain=.greendizer.com",
+                               "Expires=" + new Date(new Date().getTime() + 999999999000).toUTCString(),
+                               window.location.href.substr(0, 5) === "https" ? "secure" : ""].join('; ');
+        }
+        
+        //Case of a first time visit, with no "locale" cookie available.
+        if(!cookieLocale){
+            /**
+             * the content language is different from the default language
+             * reported by the browser. Redirect the user if an alternate
+             * in the user's preferred language is available.
+             */
+            if( (!urlMatch || urlLocale !== contentLanguage) &&
+                browserLanguage !== contentLanguage &&
+                browserLanguage in alternates){
+                window.location.href = alternates[browserLanguage];
+            }
+        }
+    } catch(e){;}
+})();
+</script>
+<meta http-equiv="Content-Language" content="en">
+<meta charset="text/html; charset=utf-8">
+<meta name="viewport" content="width=1024">
+<meta name="description" content="Learn how to interact with the Greendizer RESTful API">
+<meta name="keywords" content="invoice,bill,biller,seller,buyer,invoicer,exchange,estimate,quote,message,payment,developer,designer,company,business,invoicing,online,archive,realtime,application,apps,marketplace,viewer,creator,api,rest,leweb,cloud,computing,library,libraries,python,py,java,c#,csharp,php,js,javascript,digital,signature,rsa,encrypted,xmldsig,xml">
+<meta name="robots" content="index,follow,noimageindex">
+<meta name="slurp" content="nodir">
+<meta name="author" content="Greendizer">
+<meta name="copyright" content="2012 Greendizer SA">
+<meta property="og:type" content="product">
+<meta property="og:url" content="https://www.greendizer.com/">
+<meta property="og:description" content="APIs and tools to add cloud-based invoicing capabilities to your systems, and build apps with realtime data from the invoices exchanges.">
+<meta property="og:site_name" content="Greendizer">
+<meta property="og:title" content="Greendizer">
+<meta property="og:image" content="https://www.greendizer.com/static/images/logo.jpg">
+<meta property="og:street-address" content="15 rue de Chambery">
+<meta property="og:postal-code" content="75015">
+<meta property="og:locality" content="Paris">
+<meta property="og:country-name" content="France">
+<meta property="fb:admins" content="563670170,612569218,568453298,561205053">
+<meta property="fb:app_id" content="73222341311">
+<link rel="publisher" href="https://plus.google.com/118361734809275351334">
+<link rel="index" hreflang="en" href="https://www.greendizer.com/sitemap/">
+<link type="text/css" href="./Basics of the REST API - Greendizer_files/www.css" rel="stylesheet">
+<link type="text/css" href="./Basics of the REST API - Greendizer_files/www.columns.css" rel="stylesheet">
+<script type="text/javascript" src="./Basics of the REST API - Greendizer_files/jquery.js"></script>
+<script type="text/javascript" src="./Basics of the REST API - Greendizer_files/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./Basics of the REST API - Greendizer_files/saved_resource"></script>
+<script type="text/javascript" src="./Basics of the REST API - Greendizer_files/greendizer.common.min.js"></script>
+<script type="text/javascript" src="./Basics of the REST API - Greendizer_files/greendizer.website.min.js"></script>
+<link type="text/css" href="./Basics of the REST API - Greendizer_files/www.docs.css" rel="stylesheet">
+<script type="text/javascript">
+/* <![CDATA[ */
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-23409453-4']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+(function(b){(function(a){"__CF"in b&&"DJS"in b.__CF?b.__CF.DJS.push(a):"addEventListener"in b?b.addEventListener("load",a,!1):b.attachEvent("onload",a)})(function(){"FB"in b&&"Event"in FB&&"subscribe"in FB.Event&&(FB.Event.subscribe("edge.create",function(a){_gaq.push(["_trackSocial","facebook","like",a])}),FB.Event.subscribe("edge.remove",function(a){_gaq.push(["_trackSocial","facebook","unlike",a])}),FB.Event.subscribe("message.send",function(a){_gaq.push(["_trackSocial","facebook","send",a])}));"twttr"in b&&"events"in twttr&&"bind"in twttr.events&&twttr.events.bind("tweet",function(a){if(a){var b;if(a.target&&a.target.nodeName=="IFRAME")a:{if(a=a.target.src){a=a.split("#")[0].match(/[^?=&]+=([^&]*)?/g);b=0;for(var c;c=a[b];++b)if(c.indexOf("url")===0){b=unescape(c.split("=")[1]);break a}}b=void 0}_gaq.push(["_trackSocial","twitter","tweet",b])}})})})(window);
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Basics of the REST API - Greendizer_files/saved_resource(1)"></script><style type="text/css">.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-webkit-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_m{color:#000;background:#fff}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em;-webkit-appearance:button}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gsq_a{padding:0}.gscsep_a{display:none}.gsfe_a{border:1px solid #b9b9b9;border-top-color:#a0a0a0;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);}.gsfe_b{border:1px solid #4d90fe;outline:none;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);}.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a{color:#36c}.gsst_a,.gsst_d{display:inline-block}.gsst_a{cursor:pointer;padding:0 3px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 3px;user-select:none;-webkit-user-select:none;white-space:nowrap}.gsst_d{width:4px}.gsst_e{opacity:0.55;}.gsst_a:hover .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gssb_a{padding:0 7px}.gssb_e{border:0}.gssb_l{margin:5px 0}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style><script type="text/javascript" src="./Basics of the REST API - Greendizer_files/search.I.js"></script></head>
+<body><div id="StayFocusd-infobar" style="display: none; top: 0px; "><img src="chrome-extension://laankejkbhbdhmipfmgcngdelahlfoji/img/eye_19x19_red.png"><span id="StayFocusd-infobar-msg"></span><span id="StayFocusd-infobar-links"><a href="https://www.greendizer.com/docs/api/#" id="StayFocusd-infobar-never-show">hide forever</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.greendizer.com/docs/api/#" id="StayFocusd-infobar-hide">hide once</a></span></div>
+<div id="wrapper">
+<div style="display:none;" class="language-warning"><img alt="" src="./Basics of the REST API - Greendizer_files/en_flag.png"><span></span></div>
+<script type="text/javascript" src="./Basics of the REST API - Greendizer_files/widgets.min.js"></script>
+<iframe style="display: none; position: fixed; width: 100%; height: 100%; z-index: 9999; top: 0px; left: 0px; background-color: transparent; " id="launchpad" frameborder="0" name="lang=en&amp;origin=https%3A//www.greendizer.com&amp;id=13360943801470.7744584609754384" data-gd-id="13360943801470.7744584609754384" src="./Basics of the REST API - Greendizer_files/saved_resource(4).htm"></iframe>
+<script type="text/javascript">
+(function(){
+    window.greendizer = window.greendizer || {};
+    window.greendizer.showCentral = function(){
+        var widget = greendizer.widgets.widgetManager.getInstance().getWidget($("#launchpad").get(0));
+        widget && greendizer.website.Context.getInstance().isAuthenticated() && widget.show();
+    };
+})();
+</script>
+<header>
+<span id="login-warning" style="display:none;" onclick="$(this).hide();" class="global-warning rounded-bottom">Login is not available at this time - Please try again in a moment.</span>
+<a href="https://www.greendizer.com/"><img id="logo" alt="Greendizer" src="./Basics of the REST API - Greendizer_files/logo.png"></a>
+<div style="display: none; " id="user-surface">
+<div id="user-surface-avatar">
+<img id="user-surface-user-avatar" onerror="this.src=&#39;/static/images/userdefault.png&#39;" class="user">
+<img id="user-surface-company-logo" style="display:none" class="company" width="32" height="32" onerror="this.src=&#39;/static/images/companydefault.128.png&#39;">
+<div class="section">
+<img onclick="window.greendizer.showCentral()" title="Central" id="user-surface-central" class="central" src="./Basics of the REST API - Greendizer_files/gd32.png" alt="Central">
+</div>
+</div>
+<div id="user-surface-name" class=" dark"></div>
+</div>
+<div id="header-buttons">
+<a href="https://services.greendizer.com/signup/?locale=en" class="logged-out-only button" id="signup-button">Sign up</a>
+<button onclick="greendizer.website.Context.getInstance().login(true)" style="" id="login">Login</button>
+</div>
+<img style="display: none; " id="login-loader" src="./Basics of the REST API - Greendizer_files/loader.gif">
+<nav id="nav-menu">
+<a class=" dark" href="https://www.greendizer.com/features/">Features</a>
+<a class=" light" href="https://www.greendizer.com/pricing/">Pricing</a>
+<a class="focus dark" href="https://www.greendizer.com/docs/">Docs</a>
+<a class=" light" href="https://www.greendizer.com/blog/">Blog</a>
+</nav>
+</header>
+<section id="content">
+<style type="text/css">#wrapper.pin-pushed #sub-menu #cse{display:none;}</style>
+<section id="sub-menu">
+<ul>
+<li class="focus">
+<h1>APIs</h1>
+<ul>
+<li class="focus"><a hreflang="en" href="./Basics of the REST API - Greendizer_files/Basics of the REST API - Greendizer.htm">Basics</a><div id="___plusone_0" style="height: 15px; width: 70px; display: inline-block; text-indent: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: transparent; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; background-position: initial initial; background-repeat: initial initial; "><iframe allowtransparency="true" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="width: 70px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; height: 15px; position: static; left: 0px; top: 0px; visibility: visible; " tabindex="0" vspace="0" width="100%" id="I1_1336094381153" name="I1_1336094381153" src="./Basics of the REST API - Greendizer_files/fastbutton(1).htm" title="+1"></iframe></div></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/api/oauth/">OAuth</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/api/sellers/">Sellers</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/api/buyers/">Buyers</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/api/xmli/">XMLi</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/api/public/">Public resources</a></li>
+</ul>
+</li>
+<li>
+<h1>Libraries</h1>
+<ul>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/libraries/">Basics</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/libraries/sellers/">Sellers</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/libraries/buyers/">Buyers</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/libraries/xmli/">XMLi</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/libraries/downloads/">Downloads</a></li>
+</ul>
+</li>
+<li>
+<h1>Widgets</h1>
+<ul>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/widgets/">Explore</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/widgets/invoicelist/">Invoice List</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/widgets/invoiceviewer/">Invoice Viewer</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/widgets/invoicecreator/">Invoice Creator</a></li>
+</ul>
+</li>
+<li>
+<h1>Support</h1>
+<ul>
+<li><a href="http://code.google.com/p/greendizer-api/">Report issues</a></li>
+</ul>
+</li>
+</ul>
+<div style="padding-bottom:20px;" class="clear"></div>
+<div>
+<div id="cse" style="width: 80%;"><div class="gsc-control-cse gsc-control-cse-en"><div class="gsc-control-wrapper-cse" dir="ltr"><form class="gsc-search-box" accept-charset="utf-8"><table cellspacing="0" cellpadding="0" class="gsc-search-box"><tbody><tr><td class="gsc-input"><input autocomplete="off" type="text" size="10" class=" gsc-input " name="search" title="search" id="gsc-i-id1" dir="ltr" spellcheck="false" style="outline-style: none; outline-width: initial; outline-color: initial; background-image: url(https://www.google.com/cse/intl/en/images/google_custom_search_watermark.gif); background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(255, 255, 255); background-position: 0% 50%; background-repeat: no-repeat no-repeat; "></td><td class="gsc-search-button"><input type="button" value="Search" class="gsc-search-button" title="search"></td><td class="gsc-clear-button"><div class="gsc-clear-button" title="clear results">&nbsp;</div></td></tr></tbody></table><table cellspacing="0" cellpadding="0" class="gsc-branding"><tbody><tr><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">powered by</div></td><td class="gsc-branding-img"><img src="./Basics of the REST API - Greendizer_files/small-logo.png" class="gsc-branding-img"></td></tr></tbody></table></form><div class="gsc-tabsAreaInvisible"><div class="gsc-tabHeader gsc-inline-block gsc-tabhActive">Custom Search</div><span class="gs-spacer"> </span></div><div class="gsc-tabsAreaInvisible"></div><div class="gsc-above-wrapper-area-invisible"><table cellspacing="0" cellpadding="0" class="gsc-above-wrapper-area-container"><tbody><tr><td class="gsc-result-info-container"><div class="gsc-result-info-invisible"></div></td></tr></tbody></table></div><div class="gsc-adBlockInvisible"></div><div class="gsc-wrapper"><div class="gsc-adBlockInvisible"></div><div class="gsc-resultsbox-invisible"><div class="gsc-resultsRoot gsc-tabData gsc-tabdActive"><table cellspacing="0" cellpadding="0" class="gsc-resultsHeader"><tbody><tr><td class="gsc-twiddleRegionCell"><div class="gsc-twiddle"><div class="gsc-title">Web</div></div><div class="gsc-stats"></div><div class="gsc-results-selector gsc-all-results-active"><div class="gsc-result-selector gsc-one-result" title="show one result">&nbsp;</div><div class="gsc-result-selector gsc-more-results" title="show more results">&nbsp;</div><div class="gsc-result-selector gsc-all-results" title="show all results">&nbsp;</div></div></td><td class="gsc-configLabelCell"></td></tr></tbody></table><div><div class="gsc-expansionArea"></div></div></div></div></div></div></div></div>
+<script src="./Basics of the REST API - Greendizer_files/jsapi" type="text/javascript"></script>
+<script async="true" type="text/javascript"> 
+          google.load('search', '1', {language : 'en'});
+          google.setOnLoadCallback(function() {
+            var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+              '003680668979917808190:068bct4psie', customSearchOptions);
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            customSearchControl.draw('cse');
+          }, true);
+        </script><script src="./Basics of the REST API - Greendizer_files/saved_resource(2)" type="text/javascript"></script><link href="./Basics of the REST API - Greendizer_files/default+en.css" type="text/css" rel="stylesheet"><script src="./Basics of the REST API - Greendizer_files/default+en.I.js" type="text/javascript"></script>
+<link rel="stylesheet" href="./Basics of the REST API - Greendizer_files/www.search.css" type="text/css">
+</div>
+</section>
+<script type="text/javascript">
+	$(document).bind("ready", function(){
+		var request_url = '/docs/api/'.split("?")[0];
+		var submenuDOM = $("#sub-menu");
+		
+		var cseDOM = $("#cse");
+		submenuDOM.data("push-test", function(){
+		    return cseDOM.find(".gsc-result-info-invisible").size() !== 0;
+		});
+		
+		target = submenuDOM.find("[href='" + request_url + "']");
+		target.parent().addClass("focus").parent().parent().addClass("focus");
+		target.parent().html(target.parent().html() + '<g:plusone size="small"></g:plusone>');
+	});
+</script>
+<section id="content-items">
+<article class="content-item"><section class="content">
+<h3 id="introduction">Introduction</h3>
+<div>
+<p>Welcome to the Greendizer API.</p>
+<p>Greendizer is a RESTful webservice. It exposes a set of resources that a user can grant your application access to.</p>
+</div>
+</section></article>
+<article class="content-item"><section class="content">
+<h3>Content</h3>
+<div>
+<ul class="tableofcontent">
+<li><a href="https://www.greendizer.com/docs/api/#audience">Audience</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#general">General</a>
+<ul>
+<li><a href="https://www.greendizer.com/docs/api/#general_context">Context</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#general_resources">Resources</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#general_collections">Collections</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#general_etags">ETags</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#general_datetimes">Dates and times</a></li>
+</ul>
+</li>
+<li><a href="https://www.greendizer.com/docs/api/#authentication">Authentication</a>
+<ul>
+<li><a href="https://www.greendizer.com/docs/api/#authentication_oauth">OAuth</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#authentication_basic">HTTP basic access authentication</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#authentication_note">Important note</a></li>
+</ul>
+</li>
+<li><a href="https://www.greendizer.com/docs/api/#references">References</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#requests">Requests</a>
+<ul>
+<li><a href="https://www.greendizer.com/docs/api/#requests_root">Root</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#requests_methods">Methods</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#requests_output">Output format</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#requests_paging">Paging</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#requests_data">Including data</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#requests_conditionalretrievals">Conditional retrievals</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#requests_conditionalupdates">Conditional updates</a></li>
+</ul>
+</li>
+<li><a href="https://www.greendizer.com/docs/api/#filters">Filters</a>
+<ul>
+<li><a href="https://www.greendizer.com/docs/api/#filters_overview">Overview</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#filters_attributes">Attributes</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#filters_operators">Operators</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#filters_values">Values</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#filters_examples">Examples</a></li>
+</ul>
+</li>
+<li><a href="https://www.greendizer.com/docs/api/#responses">Responses</a>
+<ul>
+<li><a href="https://www.greendizer.com/docs/api/#responses_format">Format</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#responses_get">GET</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#responses_post">POST</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#responses_patch">PATCH</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#responses_put">PUT</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#responses_delete">DELETE</a></li>
+</ul>
+</li>
+<li><a href="https://www.greendizer.com/docs/api/#errors">Errors</a>
+<ul>
+<li><a href="https://www.greendizer.com/docs/api/#errors_statuscodes">Status codes</a></li>
+<li><a href="https://www.greendizer.com/docs/api/#errors_desc">Description</a></li>
+</ul>
+</li>
+<li><a href="https://www.greendizer.com/docs/api/#notes">Notes</a></li>
+</ul>
+</div>
+</section></article>
+<article class="content-item"><section class="content">
+<h3 id="audience">Audience</h3>
+<div>
+<p>What you're about to read is designed for people familiar with <a href="http://en.wikipedia.org/wiki/Http">HTTP</a>, <a href="http://en.wikipedia.org/wiki/Xml">XML</a> and <a href="http://en.wikipedia.org/wiki/Json">JSON</a>.</p>
+<p>We have tried to make things easy by being as compliant as possible with all the standards that make the web such a great platform.</p>
+<p>We would be glad to hear your comments and suggestions about it. Please send them to <a data-format="email" href="mailto:developers@greendizer.com">developers@greendizer.com</a>.</p>
+</div>
+</section></article>
+<article class="content-item"><section class="content">
+<h3 id="general">General</h3>
+<div>
+<h4 id="general_context">Context</h4>
+<p>What your application is allowed or forbidden to do is defined by two parameters:</p>
+<ul>
+<li>The API you are using: the Buyers or the Sellers API.</li>
+<li>The rights granted to you by the administrator of your company, or the user on behalf of whom you're making the request.</li>
+</ul>
+<h4 id="general_resources">Resources</h4>
+<p>If you're familiar with OOP, consider a resource as an object with a unique ID. Resources are organized in a virtual path. Each one has a unique URI, which is basically a permanent URL to it.</p>
+<p>Greendizer exposes many resources:</p>
+<ul>
+<li>User</li>
+<li>Email</li>
+<li>Invoice</li>
+<li>Thread</li>
+<li>Message</li>
+</ul>
+<h4 id="general_collections">Collections</h4>
+<p>A collection is just a list of resources of the same type.</p>
+<p>Collections include:</p>
+<ul>
+<li>Emails</li>
+<li>Invoices</li>
+<li>Threads</li>
+<li>Messages</li>
+</ul>
+<h4 id="general_etags">ETags</h4>
+<p>An ETag is a unique value that changes every time a resource does. Here's how it looks like in Greendizer:</p>
+<pre><code>ETag: <strong>1275417757277</strong>-<strong>512365</strong></code></pre>
+<p>The left part is a timestamp representing the last time the resource has been modified. The right one is the ID of the resource.</p>
+<p>When you make a request for a resource, the <code>ETag</code> header is sent back with the resource.</p>
+<p>When you request a collection, expect also an <code>ETag</code> header for the collection, and an <code>etag</code> field in the representation of each resources it contains.</p>
+<p>Used in conjunction with the right HTTP headers, ETags can greatly improve the performance of your application, and save you valuable bandwidth. See <a target="_self" href="https://www.greendizer.com/docs/api/#requests_conditionalupdates">conditional retrievals</a></p>
+<p>ETags are also very important to avoid conflicts when you try to update a resource. See <a href="https://www.greendizer.com/docs/api/#requests_conditionalupdates">conditional updates</a></p>
+<h4 id="general_datetimes">Dates and times</h4>
+<p>Depending on the context, you will have to use <a href="http://www.w3.org/TR/NOTE-datetime">ISO 8601</a> formatted strings, <a href="http://www.ietf.org/rfc/rfc1123.txt">RFC 1123</a> or Unix EPOCH-like timestamps with millisecond precision:</p>
+<pre><code id="httpdate">2012-05-04T01:25:08.000Z</code></pre>
+<pre><code id="rfc">Fri, 04 May 2012 01:25:08 GMT</code></pre>
+<pre><code id="timestamp">1336094708000</code></pre>
+<script type="text/javascript">
+	
+	                function padzero(n) {
+	                    return n < 10 ? '0' + n : n;
+	                }
+	                function pad2zeros(n) {
+	                    if (n < 100) {
+	                        n = '0' + n;
+	                    }
+	                    if (n < 10) {
+	                        n = '0' + n;
+	                    }
+	                    return n;
+	                };
+	                
+	                function toISOString(d) {
+	                    return d.getUTCFullYear() + '-' +  padzero(d.getUTCMonth() + 1) + '-' + padzero(d.getUTCDate()) + 'T' + padzero(d.getUTCHours()) + ':' +  padzero(d.getUTCMinutes()) + ':' + padzero(d.getUTCSeconds()) + '.' + pad2zeros(d.getUTCMilliseconds()) + 'Z';
+	                };
+	
+	
+	                $(document).bind("ready", function(){
+	                    var e_http = $("#httpdate");
+	                    var e_timestamp = $("#timestamp");
+	                    var e_rfc = $("#rfc");
+	                    window.setInterval(
+	                        function(){
+	                            d = new Date()
+	                            e_http.html(toISOString(new Date(Math.floor(d.getTime()/1000)*1000)));
+	                            e_rfc.html(d.toUTCString());
+	                            e_timestamp.html(Math.floor(d.getTime()/1000)*1000);
+	                        },
+	                        1000
+	                    );
+	                });
+	            </script>
+</div>
+</section></article>
+<article class="content-item"><section class="content">
+<h3 id="authentication">Authentication</h3>
+<div>
+<h4 id="authentication_oauth">OAuth</h4>
+<p style="vertical-align:middle">
+<img style="float:left; padding-right:30px" alt="oauth" src="./Basics of the REST API - Greendizer_files/oauth.png">
+<span><a href="http://www.oauth.net/">OAuth 2.0</a> is the authentication method we privilege. The standard is still a <a href="http://tools.ietf.org/html/draft-ietf-oauth-v2-12">draft</a>, but we think it's simple, easy and secure.</span>
+<br>
+</p><div style="margin-top:30px"><a class="button RoundedBottom RoundedTop" href="https://www.greendizer.com/docs/api/oauth/">» Get started with OAuth</a></div>
+<p></p>
+<h4 id="authentication_basic">HTTP basic access authentication</h4>
+<p style="vertical-align:middle">
+</p><div>This method is designed to allow you to provide credentials inside every request you make to the server.</div>
+<br>
+<div>Concatenate your email and password as following:</div>
+<pre><code><strong>email</strong>:<strong>password</strong></code></pre>
+<div>Then encode the result as a <code>base64</code> string and add it to the headers of every request you make:</div>
+<pre><code>Authorization: Basic {<strong>base64 encoded string</strong>}</code></pre>
+<p></p>
+<h4 id="authentication_note">Important note</h4>
+<p>If you are a third party developer, OAuth should be the only method you implement as we strongly advise our users not to share their passwords with anyone. While easier, the HTTP basic access authentication method will most often look suspicious to them.</p>
+</div>
+</section></article>
+<article class="content-item"><section class="content">
+<h3 id="references">References</h3>
+<div>
+<p>A buyer is the customer of <a href="https://www.greendizer.com/docs/api/sellers/">sellers</a>. He receives invoices and sends/receives messages.</p>
+<p>A seller has customers called the <a href="https://www.greendizer.com/docs/api/buyers/">buyers</a> in Greendizer. He sends invoices, tracks them, and sends/receives messages.</p>
+<p>
+<span>You can find detailed information about the resources and collections exposed for each one of them by following one these links:</span>
+<br>
+</p><p style="margin-top:30px"><a class="button RoundedBottom RoundedTop" href="https://www.greendizer.com/docs/api/buyers/">» Buyers reference</a></p>
+<p style="margin-top:30px"><a class="button RoundedBottom RoundedTop" href="https://www.greendizer.com/docs/api/sellers/">» Sellers reference</a></p>
+<p></p>
+</div>
+</section></article>
+<article class="content-item"><section class="content">
+<h3 id="requests">Requests</h3>
+<div>
+<h4 id="requests_root">Root</h4>
+<p>All URIs are relative to the root of our API:</p>
+<pre><code>https://api.greendizer.com/</code></pre>
+<p>You can only access it over SSL.</p>
+<h4 id="requests_me">Currently authenticated user</h4>
+<p>Use <code>me</code> with any end point to refer to the currently authenticated user.</p>
+<p>For example, to access the current user's emails, use the following endpoint:
+</p><pre><code>/buyers/<strong>me</strong>/emails/</code></pre>
+<p></p>
+<h4 id="requests_methods">Methods</h4>
+<p>
+</p><table class="">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td>Retrieves a resource or a collection of resources.</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td>Creates a new resource</td>
+</tr>
+<tr>
+<td><code>PATCH</code></td>
+<td>Partially modifies an existing resource. <a href="https://www.greendizer.com/docs/api/#requests_patch_note">Please read the important note below</a></td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td>Replaces an existing resource with a newer version</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td>Deletes a resource</td>
+</tr>
+<tr>
+<td><code>HEAD</code></td>
+<td>This method behaves exactly like a <code>GET</code> request but always returns a response with an empty body.</td>
+</tr>
+<tr>
+<td><code>OPTIONS</code></td>
+<td>Lists the supported HTTP methods for a resource or collection.</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<p>Some browsers and firewalls can create difficulties when forming requests with specific methods. We provide an alternative solution: use <code>POST</code> and add a header named <code>X-HTTP-Method-Override</code>. The service will act upon it regardless of the actual HTTP method used:</p>
+<pre><code>X-HTTP-Method-Override: <strong>DELETE</strong></code></pre>
+<p id="requests_patch_note" style="color:#000;"><strong>Important: Unfortunately, the <code>Patch</code> method is not widely supported. To avoid problems with firewalls and proxies, we only allow it to be used when declared inside an <code>X-HTTP-Method-Override</code> header as explained above.</strong></p>
+<h4 id="requests_output">Output format</h4>
+<p>You must include an <code>Accept</code> header in the request to specify the output format of the response to be returned.</p>
+<p>Supported formats and their corresponding MIME media types are:
+</p><table class="">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><code>JSON</code></td>
+<td><code>application/json</code> or <code>text/javascript</code> or <code>*/*</code></td>
+</tr>
+<tr>
+<td><code>XML</code></td>
+<td><code>application/xml</code> or <code>text/xml</code></td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<p>For example, the following <code>Accept</code> header value will return <code>JSON</code>:</p>
+<pre><code>Accept: <strong>application/json</strong></code></pre>
+<br>
+<p>If a comma-separated list of MIME media types is provided, the server will skim through it (LTR) and select the first supported value it finds.</p>
+<h4 id="requests_paging">Paging</h4>
+<p>You may use the <code>Range</code> header as in the following example to ask the server to return parts of a collection and therefore use it for paging.</p>
+<pre><code>Range: resources=<strong>{first}</strong>-<strong>{last}</strong></code></pre>
+<table class="">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><code>first</code></td>
+<td>Zero-based index of the first resource to retrieve.</td>
+</tr>
+<tr>
+<td><code>last</code></td>
+<td>Zero-based index of the last resource to return.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="requests_data">Including data</h4>
+<p><code>POST</code>, <code>PATCH</code>, and <code>PUT</code> requests must include a <code>Content-Type</code> header to specify the format of the data they carry to the server.</p>
+<p>Supported MIME media types are:</p>
+<table class="">
+<colgroup>
+<col style="width:300px">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><code>application/x-www-form-urlencoded</code></td>
+<td>Url encoded data.</td>
+</tr>
+<tr>
+<td><code>application/xml</code></td>
+<td>XML, currently only used to send invoices.</td>
+</tr>
+</tbody>
+</table>
+<p>A query string should look like this:</p>
+<pre><code>firstname=<strong>John</strong>&amp;lastname=<strong>Doe</strong>&amp;gender=<strong>Male</strong></code></pre>
+<h4 id="requests_conditionalretrievals">Conditional retrievals</h4>
+<p>Include the <code>If-Match</code> header in order to force the server to process your request only if the ETag of the resource or the collection you have requested matches the one you have.</p>
+<pre><code>If-Match: <strong>1275417757277</strong>-<strong>512365</strong></code></pre>
+<br>
+<p>The <code>If-Modified-Since</code> header to force the server to see if the resource/collection has changed since a specific date before its sends it back to you.</p>
+<pre><code>If-Modified-Since: <strong>Wed, 02 Jun 2010 13:10:00 GMT</strong></code></pre>
+<br>
+<p>The <code>If-None-Match</code> header takes a list of ETags representing resources that are already available in your local cache and should therefore not be sent back again.</p>
+<pre><code>If-None-Match: <strong>1275417757277</strong>-<strong>512365</strong>;<strong>127547854399</strong>-<strong>282365</strong></code></pre>
+<br>
+<p>Use the <code>If-Range</code> header in conjunction with the <code>Range</code> header to force the server to only retrieve the requested part of the collection if its ETag corresponds to the one you have specified. Otherwise, it will send you the first part of the new version of the collection to help you rebuild the representation.</p>
+<pre><code>If-Range: <strong>1275417757277</strong>-<strong>512365</strong></code>
+<code>Range: resources=0-1</code></pre>
+<br>
+<p><strong>
+All responses come with an <code>ETag</code> and a <code>Last-Modified</code> header containing values
+you can use with the conditional request headers exposed above.<br><br>
+For example, the <code>ETag</code> of an invoice you have retrieved 5 minutes ago can serve as a
+value for the <code>If-Match</code> header of the request you are about to make to refresh it. This way,
+the server will only send you the invoice again if it has changed since your last request.
+</strong></p>
+<br>
+<p>These headers are truly what makes the web magical. They can dramatically improve the speed and the performance of your applications.</p>
+<h4 id="requests_conditionalupdates">Conditional updates</h4>
+<p>The <code>If-Unmodified-Since</code> and/or the <code>If-Match</code> headers should be used with <code>PATCH</code> and <code>PUT</code> requests to avoid conflicts when updating resources. If included, the server verifies that the resource hasn't been modified before applying the modifications.</p>
+<pre><code>If-Unmodified-Since: <strong>Wed, 02 Jun 2010 13:10:00 GMT</strong></code></pre>
+<pre><code>If-Match: <strong>1275417757277</strong>-<strong>512365</strong></code></pre>
+</div>
+</section></article>
+<article class="content-item"><section class="content">
+<h3 id="filters">Filters</h3>
+<div>
+<h4 id="filters_overview">Overview</h4>
+<p>You can filter the elements of a collection using a query string variable named "<code>q</code>" as following:</p>
+<pre><code>/buyers/<strong>1</strong>/invoices/?q=<strong>filter</strong></code></pre>
+<br>
+<p>A <code>filter</code> is a URL encoded string of concatenated <code>[attribute][operator][value]</code> groups separated by a <code>"|"</code> (pipe or vertical bar).</p>
+<h4 id="filters_attributes">Attributes</h4>
+<p>Attributes are specific to the resource type you're handling.</p>
+<h4 id="filters_operators">Operators</h4>
+<table class="">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><code>&lt;=</code></td>
+<td>Less than or equal to</td>
+</tr>
+<tr>
+<td><code>&lt;&lt;</code></td>
+<td>Less than</td>
+</tr>
+<tr>
+<td><code>&gt;&gt;</code></td>
+<td>Greater than</td>
+</tr>
+<tr>
+<td><code>&gt;=</code></td>
+<td>Greater than or equal to</td>
+</tr>
+<tr>
+<td><code>==</code></td>
+<td>Equals</td>
+</tr>
+</tbody>
+</table>
+<h4 id="filters_values">Values</h4>
+<p>Dates and times must be converted to Epoch-style timestamps with milliseconds precision.</p>
+<p>For booleans, use <code>1</code>/<code>0</code> or <code>true</code>/<code>false</code>.</p>
+<h4 id="filters_examples">Examples</h4>
+<p>These examples show unencoded filter strings that you could use to filter invoices.</p>
+<br>
+<p>Return flagged and unread invoices only:</p>
+<pre><code>flagged==<strong>1</strong>|read==<strong>0</strong></code></pre>
+<br>
+<p>Return invoices with total exceeding $150,00:</p>
+<pre><code>currency==<strong>USD</strong>|total&gt;&gt;<strong>150</strong></code></pre>
+</div>
+</section></article>
+<article class="content-item"><section class="content">
+<h3 id="responses">Responses</h3>
+<div>
+<h4 id="responses_format">Format</h4>
+<p>When a reponse carries data, the format of its content depends on the value you have specified in the <code>Accept</code> header of your request.</p>
+<br>
+<p>Here's what you should expect if your request was aimed at a resource:</p>
+<pre><code>HTTP/1.1 200 OK
+Date: Fri, 04 Jun 2010 15:35:00 GMT
+Content-Type: application/json
+ETag: 1275483600000-587452
+Last-Modified: Wed, 02 Jun 2010 13:10:00 GMT
+Server: spizer
+
+{
+    "createdDate":<strong>1275483600000</strong>,
+    "firstname":<strong>"James"</strong>,
+    "lastname":<strong>"Hetfield"</strong>
+}</code></pre>
+<pre><code>HTTP/1.1 200 OK
+Date: Fri, 04 Jun 2010 15:35:00 GMT
+Content-Type: application/xml
+ETag: 1275483600000-587452
+Last-Modified: Wed, 02 Jun 2010 13:10:00 GMT
+Server: spizer
+
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;user&gt;
+    &lt;createdDate&gt;<strong>2010-06-02</strong>&lt;/createdDate&gt;
+    &lt;firstname&gt;<strong>James</strong>&lt;/firstname&gt;
+    &lt;lastname&gt;<strong>Hetfield</strong>&lt;/lastname&gt;
+&lt;/user&gt;</code></pre>
+<br>
+<p>Here's what a request of a collection including a <code>Range</code> header would return:</p>
+<pre><code>HTTP/1.1 206 PARTIAL CONTENT
+Date: Fri, 04 Jun 2010 15:35:00 GMT
+Content-Type: application/json
+ETag: 1275485740000-3691458
+Last-Modified: Wed, 02 Jun 2010 13:10:00 GMT
+Content-Range: users 0-1/2
+Server: spizer
+
+[
+    {
+        "createdDate":<strong>1275485740000</strong>,
+        "uri":<strong>"https://api.greendizer.com/example/3691458/"</strong>,
+        "etag":<strong>"1275485740000-3691458"</strong>,
+        "firstname":<strong>"Jimi"</strong>,
+        "lastname":<strong>"Hendrix"</strong>
+    },
+    {
+        "createdDate":<strong>1275485740000"</strong>,
+        "uri":<strong>"https://api.greendizer.com/example/78425142/"</strong>,
+        "etag":<strong>"1275483600000-78425142"</strong>,
+        "firstname":<strong>"Ella"</strong>,
+        "lastname":<strong>"Fitzgerald"</strong>
+    }
+]</code></pre>
+<pre><code>HTTP/1.1 206 PARTIAL CONTENT
+Date: Fri, 04 Jun 2010 15:35:00 GMT
+Content-Type: application/xml
+ETag: 1275485740000-3691458
+Last-Modified: Wed, 02 Jun 2010 13:10:00 GMT
+Content-Range: users 0-1/2
+Server: spizer
+
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;users&gt;
+    &lt;user&gt;
+        &lt;createdDate&gt;<strong>2010-10-01T20:42:37</strong>&lt;/createdDate&gt;
+        &lt;uri&gt;<strong>https://api.greendizer.com/example/3691458/</strong>&lt;/uri&gt;
+        &lt;etag&gt;<strong>1275417757277-3691458</strong>&lt;/etag&gt;
+        &lt;firstname&gt;<strong>Jimi</strong>&lt;/firstname&gt;
+        &lt;lastname&gt;<strong>Hendrix</strong>&lt;/lastname&gt;
+    &lt;/user&gt;
+    &lt;user&gt;
+        &lt;created&gt;<strong>2010-10-01T20:42:37</strong>&lt;/createdDate&gt;
+        &lt;uri&gt;<strong>https://api.greendizer.com/example/78425142/</strong>&lt;/uri&gt;
+        &lt;etag&gt;<strong>1275417757277-78425142</strong>&lt;/etag&gt;
+        &lt;firstname&gt;<strong>Ella</strong>&lt;/firstname&gt;
+        &lt;lastname&gt;<strong>Fitzgerald</strong>&lt;/lastname&gt;
+    &lt;/user&gt;
+&lt;/users&gt;</code></pre>
+<h4 id="responses_get">GET</h4>
+<table class="">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><code>200 OK</code></td>
+<td>The response contains the entire resource or collection in its body.</td>
+</tr>
+<tr>
+<td><code>204 No Content</code></td>
+<td>No data was returned because the requested resource or collection is empty.</td>
+</tr>
+<tr>
+<td><code>206 Partial Content</code></td>
+<td>The returned response contains only a part of the collection. This status code should only be expected if the request included a valid <code>Range</code> header.</td>
+</tr>
+<tr>
+<td><code>304 Not Modified</code></td>
+<td>The resource or the collection has not been modified. This status code should only be expected if the <a href="https://www.greendizer.com/docs/api/#requests_conditionalretrievals">request was conditional</a>.</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p>Responses with a <code>206 Partial Content</code> status code are returned with a <code>Content-Range</code> header which contains information about the part of the collection you have received. The format is the following:</p>
+<pre><code>Content-Range: <strong>{unit}</strong>&nbsp;<strong>{first}</strong>-<strong>{last}</strong>/<strong>{total}</strong></code></pre>
+<table class="">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><code>unit</code></td>
+<td>Represents the type of resources contained in the response.</td>
+</tr>
+<tr>
+<td><code>first</code></td>
+<td>Represents the zero-based index of the first resource retrieved.</td>
+</tr>
+<tr>
+<td><code>last</code></td>
+<td>Represents the zero-based index of the last resource retrieved.</td>
+</tr>
+<tr>
+<td><code>total</code></td>
+<td>Represents the total number of resources available in the server.</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p>All resources are serialized with a <code>createdDate</code> field that represents the date on which the resource was created on Greendizer.</p>
+<h4 id="responses_post">POST</h4>
+<table class="">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><code>201 Created</code></td>
+<td>The resource has successfully been created and included in the body of the response along with its URI in the <code>Location</code> header.</td>
+</tr>
+<tr>
+<td><code>202 Accepted</code></td>
+<td>The request has been accepted and queued. </td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses_patch">PATCH</h4>
+<table class="">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><code>204 No Content</code></td>
+<td>The resource has been successfully patched. The body of the response is empty, and the <code>ETag</code> header contains an updated value.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses_put">PUT</h4>
+<table class="">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><code>200 OK</code></td>
+<td>The resource has been successfully updated and returned in the body of the response.</td>
+</tr>
+<tr>
+<td><code>204 No Content</code></td>
+<td>The resource has been successfully updated and the body of the response is empty.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses_delete">DELETE</h4>
+<table class="">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><code>204 No Content</code></td>
+<td>The resource has been deleted and the body of the response is empty.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section></article>
+<article class="content-item"><section class="content">
+<h3 id="errors">Errors</h3>
+<div>
+<h4 id="errors_statuscodes">Status Codes</h4>
+<p>Here's the exhaustive list of status codes that might be returned to you if your request failed:</p>
+<table class="">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><code>400 Bad Request</code></td>
+<td>The request contained bad syntax.</td>
+</tr>
+<tr>
+<td><code>401 Unauthorized</code></td>
+<td>Authentication is required. learn more about <a href="https://www.greendizer.com/docs/api/#authentication">authenticating</a> with <a href="https://www.greendizer.com/docs/api/oauth/">OAuth</a> on Greendizer.</td>
+</tr>
+<tr>
+<td><code>403 Forbidden</code></td>
+<td>The authenticated user is not allowed or didn't grant your app enough rights to read or write the protected resource or collection.</td>
+</tr>
+<tr>
+<td><code>404 Not Found</code></td>
+<td>The requested resource could not be found.</td>
+</tr>
+<tr>
+<td><code>405 Method Not Allowed</code></td>
+<td>The request has been sent using an invalid or forbidden HTTP method. Allowed methods for that resource or collection are listed in the <code>Allow</code> header of the response.</td>
+</tr>
+<tr>
+<td><code>406 Not Acceptable</code></td>
+<td>None of the MIME media types listed in the <code>Accept</code> header of the request is valid. Read the <a href="https://www.greendizer.com/docs/api/#requests_output">output format</a> section to see the list of supported formats.</td>
+</tr>
+<tr>
+<td><code>409 Conflict</code></td>
+<td>The resource could not be modified because one or many of the conditions in your request could not be matched. A copy of the latest version is included in the request.</td>
+</tr>
+<tr>
+<td><code>413 Request Entity Too Large</code></td>
+<td>The requested collection is too large to be entirely returned. <a href="https://www.greendizer.com/docs/api/#requests_paging">More about Paging</a>.</td>
+</tr>
+<tr>
+<td><code>416 Request Range Not Satisfiable</code></td>
+<td>The values in the <code>Range</code> header point to a part of a collection that's not available.</td>
+</tr>
+<tr>
+<td><code>422 Unprocessable Entity</code></td>
+<td>The patch you are trying to apply to the resource is not valid. Equivalent to a <code>400 Bad Request</code> status code for non-<code>Patch</code> requests.</td>
+</tr>
+<tr>
+<td><code>500 Internal Server Error</code></td>
+<td>An unhandled error occured. Please let us know about it.</td>
+</tr>
+<tr>
+<td><code>503 Service Unavailable</code></td>
+<td>The service is temporarly unavailable.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="errors_desc">Description</h4>
+<p>You'll find a useful description of the error that caused your request to fail in the body of the response returned to you:</p>
+<pre><code>{
+    "desc":<strong>"Error description comes here."</strong>
+}</code></pre>
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;error&gt;
+    &lt;desc&gt;<strong>Error description comes here.</strong>&lt;/desc&gt;
+&lt;/error&gt;</code></pre>
+</div>
+</section></article>
+<article class="content-item"><section class="content">
+<h3 id="notes">Notes</h3>
+<div>
+<p>Version: 1.7.1</p>
+<p>Last update: Feb 25<sup>th</sup>, 2012.</p>
+<p>Contact: <a data-format="email" href="mailto:developers@greendizer.com">developers@greendizer.com</a></p>
+</div>
+</section></article>
+</section>
+</section>
+<script type="text/javascript">
+(function(){var instance = greendizer.website.Context.getInstance();(window.GREENDIZER_PROTECTED !== false) && instance.login();})();
+("prettyPrint" in window) && prettyPrint();
+</script>
+<div id="push"></div>
+</div>
+<footer>
+<div id="pre-footer">
+<ol id="breadcrumbs" class="footer">
+<li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb" title="Home"><a itemprop="url" href="https://www.greendizer.com/"><img style="vertical-align: text-bottom; width:16px; height:16px;" alt="Home" src="./Basics of the REST API - Greendizer_files/gd16bw.png"></a></li>
+<li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="https://www.greendizer.com/docs/"><span itemprop="title">Documentation and Resources</span></a></li>
+<li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="./Basics of the REST API - Greendizer_files/Basics of the REST API - Greendizer.htm"><span itemprop="title">API</span></a></li>
+<li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="./Basics of the REST API - Greendizer_files/Basics of the REST API - Greendizer.htm"><span itemprop="title">Basics</span></a></li>
+</ol>
+</div>
+<nav>
+<section>
+<h1>Product</h1>
+<ul>
+<li><a title="Back to the home page" href="https://www.greendizer.com/">Home</a></li>
+<li><a title="Explore the amazing features of Greendizer" href="https://www.greendizer.com/features/">Features</a></li>
+<li><a title="More about our pricing" href="https://www.greendizer.com/pricing/">Pricing</a></li>
+<li><a title="Visit our support site" href="http://support.greendizer.com/">Support</a></li>
+</ul>
+</section>
+<section>
+<h1>Docs</h1>
+<ul>
+<li><a title="Get started with our REST API, libs, widgets and tools to build apps." hreflang="en" href="https://www.greendizer.com/docs/">Get started</a></li>
+<li><a title="REST API reference" hreflang="en" href="./Basics of the REST API - Greendizer_files/Basics of the REST API - Greendizer.htm">API</a></li>
+<li><a title="Invoicing and invoice-querying helper libs in languages like Python, Java, PHP and more" hreflang="en" href="https://www.greendizer.com/docs/libraries/">Libraries</a></li>
+<li><a title="Powerful widgets to get the most out of Greendizer" hreflang="en" href="https://www.greendizer.com/docs/widgets/">Widgets</a></li>
+</ul>
+</section>
+<section>
+<h1>Company</h1>
+<ul>
+<li><a title="More about the company, the team and how to connect with both" href="https://www.greendizer.com/company/">About Greendizer</a></li>
+<li><a title="Check out our blog for news, discussions and new features" href="https://www.greendizer.com/blog/">Blog</a></li>
+<li>
+<a target="_blank" title="Join us on Google+" href="https://plus.google.com/118361734809275351334">Google+</a>
+<div id="___plusone_1" style="height: 15px; width: 70px; display: inline-block; text-indent: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: transparent; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; background-position: initial initial; background-repeat: initial initial; "><iframe allowtransparency="true" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="width: 70px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; height: 15px; position: static; left: 0px; top: 0px; visibility: visible; " tabindex="0" vspace="0" width="100%" id="I2_1336094381164" name="I2_1336094381164" src="./Basics of the REST API - Greendizer_files/fastbutton.htm" title="+1"></iframe></div>
+</li>
+<li>
+<a target="_blank" title="Interact with Greendizer on Facebook" href="http://www.facebook.com/greendizer/">Facebook</a>
+</li>
+<li><a target="_blank" title="Follow Greendizer on Twitter" href="http://twitter.com/greendizer/">Twitter</a></li>
+</ul>
+</section>
+<section>
+<h1>Policies</h1>
+<ul>
+<li><a title="Terms of use of Greendizer" hreflang="en" href="https://www.greendizer.com/tos/">Terms of service</a></li>
+</ul>
+</section>
+<section class="text">
+<img width="92" height="92" alt="Greendizer" src="./Basics of the REST API - Greendizer_files/gd_dark.png">
+<p id="sitemap-link"><a title="Greendizer.com Site Map" href="https://www.greendizer.com/sitemap/">Site map</a></p>
+<p>©2012 - All rights reserved.</p>
+</section>
+<div class="clear"></div>
+</nav>
+</footer>
+<script type="text/javascript">
+            (function() {
+                window.___gcfg = {
+                    lang: 'en',
+                    parsetags: 'onload'
+                };
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+              })();
+        </script>
+
+
+<table cellspacing="0" cellpadding="0" style="display: none; top: 347px; width: 218px; left: 524px; position: absolute; " class="gstl_0 gssb_c"><tbody><tr><td class="gssb_f"></td><td class="gssb_e" style="width: 100%; "></td></tr></tbody></table></body></html>

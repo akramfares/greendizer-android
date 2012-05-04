@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<!-- saved from url=(0027)https://api.greendizer.com/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="robots" content="noindex,nofollow,noimageindex,nodir">
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript">(function(){var e={};var n=/^(http[s]?:\/\/[^/]+)\/?.*$/;var a=function(o){var i=n.exec(o);if(i&&i.length>1){return i[1]}};var b=window.name.split("&");var l={};for(var g=0;g<b.length;g++){var f=b[g].split("=");l[f[0]]=unescape(f[1])}var h=["d"];for(var g=0;g<h.length;g++){if(!l[h[g]]||l[h[g]].length<1){throw new Error(h[g]+" is invalid or could not be found.")}}var d=function(q){var o={status:q.status,responseText:q.responseText,headers:{}};var s=q.getAllResponseHeaders().split("\n");for(var p=0;p<s.length;p++){var r=s[p].substr(0,s[p].indexOf(":"));if(r.length>0){o.headers[r.replace("-","_").toLowerCase()]=q.getResponseHeader(r)}}return o};var k=function(o){if(o.data.id in e){return}var i=o.data.options;$.extend(i,{url:i.url,success:!o.data.options.success?null:function(q,r,p){o.source.postMessage(JSON.stringify({id:o.data.id,type:"start_ajax_response",event:"success",data:q,textStatus:r,xhr:d(p)}),o.origin)},error:!o.data.options.error?null:function(p,r,q){o.source.postMessage(JSON.stringify({id:o.data.id,type:"start_ajax_response",event:"error",textStatus:r,xhr:d(p)}),o.origin)}});xhr=$.ajax(o.data.options);e[o.data.id]=xhr};var m=function(i){if(i.data.id in e){e[i.data.id]&&e[i.data.id].abort();delete e[i.data.id]}};var c=a(l.d);var j=function(i){if(i.origin!==c){return}var o={data:typeof i.data==="object"?i.data:JSON.parse(i.data||""),source:i.source,origin:i.origin};switch(o.data.type){case"start_ajax":return k(o);case"abort_ajax":return m(o)}};"addEventListener" in window?window.addEventListener("message",j,false):window.attachEvent("onmessage",j)})();</script>
+</head>
+<body>
+</body></html>

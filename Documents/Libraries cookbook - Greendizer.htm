@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://www.greendizer.com/docs/libraries/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en" class=" js borderradius boxshadow textshadow opacity"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./Libraries cookbook - Greendizer_files/cb=gapi.loaded0" async=""></script><script type="text/javascript" async="" src="./Libraries cookbook - Greendizer_files/plusone.js" gapi_processed="true"></script><script type="text/javascript" async="" src="./Libraries cookbook - Greendizer_files/ga.js"></script><script type="text/javascript" async="" src="./Libraries cookbook - Greendizer_files/ga.js"></script><script type="text/javascript">
+//<![CDATA[
+try{if (!window.CloudFlare) { var CloudFlare=[{verbose:0,p:0,byc:0,owlid:0,mirage:0,oracle:"82/3f73793a7b7aa6a429141ec16904d2",paths:{cloudflare:"/cdn-cgi/nexp/v=1443929931/"},atok:"4e06fa8b804fb039e1f08e68ed044898",zone:"greendizer.com",rocket:"0",apps:{"ga_key":{"ua":"UA-23409453-4","ga_bs":"2"}}}];document.write('<script type="text/javascript" src="//ajax.cloudflare.com/cdn-cgi/nexp/v=3368044129/cloudflare.min.js"><'+'\/script>')}}catch(a){};
+//]]>
+</script><script type="text/javascript" src="./Libraries cookbook - Greendizer_files/cloudflare.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+window.__CF=window.__CF||{};window.__CF.AJS={"ga_key":{"ua":"UA-23409453-4","ga_bs":"2"}};
+//]]>
+</script>
+<title>Libraries cookbook - Greendizer</title>
+<script type="text/javascript">
+(function(){
+    try{ 
+        var contentLanguage = document.getElementsByTagName("html")[0].lang;
+        var cookieLocale;
+        
+        var urlMatch = window.location.href.match(new RegExp("\/([a-z]{2})\/", "i"));
+        var urlLocale = urlMatch ? urlMatch[1] : "en";
+        var browserLanguage = (window.navigator.language || 
+                               window.navigator.browserLanguage).split("-")[0];
+        
+        //Building a hash of the available alternates to the current page.
+        var alternates = {};
+        var links = document.getElementsByTagName("link");
+        for(var j=0; j < links.length; j++){
+            alternates[links[j].hreflang] = links[j].href;
+        }
+        
+        //Looking for the "locale" cookie.
+        var cookies = document.cookie.split("; ");
+        for(var i=0; i < cookies.length; i++){
+            var parts = cookies[i].split("=");
+            if(parts[0] === "locale"){
+                cookieLocale = parts[1];
+                
+                if(parts[1] === contentLanguage){
+                    /**
+                     * Ideal case: the page's language matched the preferred
+                     * language of the user according to the value carried
+                     * by the "locale" cookie. 
+                     */
+                    return;
+                } else if (parts[1] in alternates) {
+                    /**
+                     * Preferred language doesn't match the page's content language,
+                     * but an alternate is available. 
+                     */
+                    window.location.href = alternates[parts[1]];
+                }
+                break;
+            }
+        }       
+        
+        /*
+         * Case of a page loaded with from the cache,
+         * and no cookie could be written by the server.
+         */
+        if(!cookieLocale && 
+            contentLanguage === urlMatch &&
+            browserLanguage !== contentLanguage){
+            document.cookie = ["locale=" + contentLanguage,
+                               "Path=/",
+                               "Domain=.greendizer.com",
+                               "Expires=" + new Date(new Date().getTime() + 999999999000).toUTCString(),
+                               window.location.href.substr(0, 5) === "https" ? "secure" : ""].join('; ');
+        }
+        
+        //Case of a first time visit, with no "locale" cookie available.
+        if(!cookieLocale){
+            /**
+             * the content language is different from the default language
+             * reported by the browser. Redirect the user if an alternate
+             * in the user's preferred language is available.
+             */
+            if( (!urlMatch || urlLocale !== contentLanguage) &&
+                browserLanguage !== contentLanguage &&
+                browserLanguage in alternates){
+                window.location.href = alternates[browserLanguage];
+            }
+        }
+    } catch(e){;}
+})();
+</script>
+<meta http-equiv="Content-Language" content="en">
+<meta charset="text/html; charset=utf-8">
+<meta name="viewport" content="width=1024">
+<meta name="description" content="Helper libraries in Python, PHP, Java, Javascript, .NET and Javascript.">
+<meta name="keywords" content="invoice,bill,biller,seller,buyer,invoicer,exchange,estimate,quote,message,payment,developer,designer,company,business,invoicing,online,archive,realtime,application,apps,marketplace,viewer,creator,api,rest,leweb,cloud,computing,library,libraries,python,py,java,c#,csharp,php,js,javascript,digital,signature,rsa,encrypted,xmldsig,xml">
+<meta name="robots" content="index,follow,noimageindex">
+<meta name="slurp" content="nodir">
+<meta name="author" content="Greendizer">
+<meta name="copyright" content="2012 Greendizer SA">
+<meta property="og:type" content="product">
+<meta property="og:url" content="https://www.greendizer.com/">
+<meta property="og:description" content="APIs and tools to add cloud-based invoicing capabilities to your systems, and build apps with realtime data from the invoices exchanges.">
+<meta property="og:site_name" content="Greendizer">
+<meta property="og:title" content="Greendizer">
+<meta property="og:image" content="https://www.greendizer.com/static/images/logo.jpg">
+<meta property="og:street-address" content="15 rue de Chambery">
+<meta property="og:postal-code" content="75015">
+<meta property="og:locality" content="Paris">
+<meta property="og:country-name" content="France">
+<meta property="fb:admins" content="563670170,612569218,568453298,561205053">
+<meta property="fb:app_id" content="73222341311">
+<link rel="publisher" href="https://plus.google.com/118361734809275351334">
+<link rel="index" hreflang="en" href="https://www.greendizer.com/sitemap/">
+<link type="text/css" href="./Libraries cookbook - Greendizer_files/www.css" rel="stylesheet">
+<link type="text/css" href="./Libraries cookbook - Greendizer_files/www.columns.css" rel="stylesheet">
+<script type="text/javascript" src="./Libraries cookbook - Greendizer_files/jquery.js"></script>
+<script type="text/javascript" src="./Libraries cookbook - Greendizer_files/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./Libraries cookbook - Greendizer_files/saved_resource"></script>
+<script type="text/javascript" src="./Libraries cookbook - Greendizer_files/greendizer.common.min.js"></script>
+<script type="text/javascript" src="./Libraries cookbook - Greendizer_files/greendizer.website.min.js"></script>
+<link type="text/css" rel="stylesheet" href="./Libraries cookbook - Greendizer_files/www.docs.css">
+<link type="text/css" rel="stylesheet" href="./Libraries cookbook - Greendizer_files/prettify.css">
+<script type="text/javascript">
+/* <![CDATA[ */
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-23409453-4']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+(function(b){(function(a){"__CF"in b&&"DJS"in b.__CF?b.__CF.DJS.push(a):"addEventListener"in b?b.addEventListener("load",a,!1):b.attachEvent("onload",a)})(function(){"FB"in b&&"Event"in FB&&"subscribe"in FB.Event&&(FB.Event.subscribe("edge.create",function(a){_gaq.push(["_trackSocial","facebook","like",a])}),FB.Event.subscribe("edge.remove",function(a){_gaq.push(["_trackSocial","facebook","unlike",a])}),FB.Event.subscribe("message.send",function(a){_gaq.push(["_trackSocial","facebook","send",a])}));"twttr"in b&&"events"in twttr&&"bind"in twttr.events&&twttr.events.bind("tweet",function(a){if(a){var b;if(a.target&&a.target.nodeName=="IFRAME")a:{if(a=a.target.src){a=a.split("#")[0].match(/[^?=&]+=([^&]*)?/g);b=0;for(var c;c=a[b];++b)if(c.indexOf("url")===0){b=unescape(c.split("=")[1]);break a}}b=void 0}_gaq.push(["_trackSocial","twitter","tweet",b])}})})})(window);
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Libraries cookbook - Greendizer_files/saved_resource(1)"></script><style type="text/css">.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-webkit-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_m{color:#000;background:#fff}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em;-webkit-appearance:button}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gsq_a{padding:0}.gscsep_a{display:none}.gsfe_a{border:1px solid #b9b9b9;border-top-color:#a0a0a0;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);}.gsfe_b{border:1px solid #4d90fe;outline:none;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);}.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a{color:#36c}.gsst_a,.gsst_d{display:inline-block}.gsst_a{cursor:pointer;padding:0 3px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 3px;user-select:none;-webkit-user-select:none;white-space:nowrap}.gsst_d{width:4px}.gsst_e{opacity:0.55;}.gsst_a:hover .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gssb_a{padding:0 7px}.gssb_e{border:0}.gssb_l{margin:5px 0}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style><script type="text/javascript" src="./Libraries cookbook - Greendizer_files/search.I.js"></script></head>
+<body><div id="StayFocusd-infobar" style="display: none; top: 0px; "><img src="chrome-extension://laankejkbhbdhmipfmgcngdelahlfoji/img/eye_19x19_red.png"><span id="StayFocusd-infobar-msg"></span><span id="StayFocusd-infobar-links"><a href="https://www.greendizer.com/docs/libraries/#" id="StayFocusd-infobar-never-show">hide forever</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.greendizer.com/docs/libraries/#" id="StayFocusd-infobar-hide">hide once</a></span></div>
+<div id="wrapper">
+<div style="display:none;" class="language-warning"><img alt="" src="./Libraries cookbook - Greendizer_files/en_flag.png"><span></span></div>
+<script type="text/javascript" src="./Libraries cookbook - Greendizer_files/widgets.min.js"></script>
+<iframe style="display: none; position: fixed; width: 100%; height: 100%; z-index: 9999; top: 0px; left: 0px; background-color: transparent; " id="launchpad" frameborder="0" name="lang=en&amp;origin=https%3A//www.greendizer.com&amp;id=13360942512620.5484468375798315" data-gd-id="13360942512620.5484468375798315" src="./Libraries cookbook - Greendizer_files/saved_resource(4).htm"></iframe>
+<script type="text/javascript">
+(function(){
+    window.greendizer = window.greendizer || {};
+    window.greendizer.showCentral = function(){
+        var widget = greendizer.widgets.widgetManager.getInstance().getWidget($("#launchpad").get(0));
+        widget && greendizer.website.Context.getInstance().isAuthenticated() && widget.show();
+    };
+})();
+</script>
+<header>
+<span id="login-warning" style="display:none;" onclick="$(this).hide();" class="global-warning rounded-bottom">Login is not available at this time - Please try again in a moment.</span>
+<a href="https://www.greendizer.com/"><img id="logo" alt="Greendizer" src="./Libraries cookbook - Greendizer_files/logo.png"></a>
+<div style="display: none; " id="user-surface">
+<div id="user-surface-avatar">
+<img id="user-surface-user-avatar" onerror="this.src=&#39;/static/images/userdefault.png&#39;" class="user">
+<img id="user-surface-company-logo" style="display:none" class="company" width="32" height="32" onerror="this.src=&#39;/static/images/companydefault.128.png&#39;">
+<div class="section">
+<img onclick="window.greendizer.showCentral()" title="Central" id="user-surface-central" class="central" src="./Libraries cookbook - Greendizer_files/gd32.png" alt="Central">
+</div>
+</div>
+<div id="user-surface-name" class=" dark"></div>
+</div>
+<div id="header-buttons">
+<a href="https://services.greendizer.com/signup/?locale=en" class="logged-out-only button" id="signup-button">Sign up</a>
+<button onclick="greendizer.website.Context.getInstance().login(true)" style="" id="login">Login</button>
+</div>
+<img style="display: none; " id="login-loader" src="./Libraries cookbook - Greendizer_files/loader.gif">
+<nav id="nav-menu">
+<a class=" dark" href="https://www.greendizer.com/features/">Features</a>
+<a class=" light" href="https://www.greendizer.com/pricing/">Pricing</a>
+<a class="focus dark" href="https://www.greendizer.com/docs/">Docs</a>
+<a class=" light" href="https://www.greendizer.com/blog/">Blog</a>
+</nav>
+</header>
+<section id="content">
+<style type="text/css">#wrapper.pin-pushed #sub-menu #cse{display:none;}</style>
+<section id="sub-menu">
+<ul>
+<li>
+<h1>APIs</h1>
+<ul>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/api/">Basics</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/api/oauth/">OAuth</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/api/sellers/">Sellers</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/api/buyers/">Buyers</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/api/xmli/">XMLi</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/api/public/">Public resources</a></li>
+</ul>
+</li>
+<li class="focus">
+<h1>Libraries</h1>
+<ul>
+<li class="focus"><a hreflang="en" href="./Libraries cookbook - Greendizer_files/Libraries cookbook - Greendizer.htm">Basics</a><div id="___plusone_0" style="height: 15px; width: 70px; display: inline-block; text-indent: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: transparent; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; background-position: initial initial; background-repeat: initial initial; "><iframe allowtransparency="true" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="width: 70px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; height: 15px; position: static; left: 0px; top: 0px; visibility: visible; " tabindex="0" vspace="0" width="100%" id="I1_1336094251634" name="I1_1336094251634" src="./Libraries cookbook - Greendizer_files/fastbutton(1).htm" title="+1"></iframe></div></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/libraries/sellers/">Sellers</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/libraries/buyers/">Buyers</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/libraries/xmli/">XMLi</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/libraries/downloads/">Downloads</a></li>
+</ul>
+</li>
+<li>
+<h1>Widgets</h1>
+<ul>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/widgets/">Explore</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/widgets/invoicelist/">Invoice List</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/widgets/invoiceviewer/">Invoice Viewer</a></li>
+<li><a hreflang="en" href="https://www.greendizer.com/docs/widgets/invoicecreator/">Invoice Creator</a></li>
+</ul>
+</li>
+<li>
+<h1>Support</h1>
+<ul>
+<li><a href="http://code.google.com/p/greendizer-api/">Report issues</a></li>
+</ul>
+</li>
+</ul>
+<div style="padding-bottom:20px;" class="clear"></div>
+<div>
+<div id="cse" style="width: 80%;"><div class="gsc-control-cse gsc-control-cse-en"><div class="gsc-control-wrapper-cse" dir="ltr"><form class="gsc-search-box" accept-charset="utf-8"><table cellspacing="0" cellpadding="0" class="gsc-search-box"><tbody><tr><td class="gsc-input"><input autocomplete="off" type="text" size="10" class=" gsc-input " name="search" title="search" id="gsc-i-id1" dir="ltr" spellcheck="false" style="outline-style: none; outline-width: initial; outline-color: initial; background-image: url(https://www.google.com/cse/intl/en/images/google_custom_search_watermark.gif); background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(255, 255, 255); background-position: 0% 50%; background-repeat: no-repeat no-repeat; "></td><td class="gsc-search-button"><input type="button" value="Search" class="gsc-search-button" title="search"></td><td class="gsc-clear-button"><div class="gsc-clear-button" title="clear results">&nbsp;</div></td></tr></tbody></table><table cellspacing="0" cellpadding="0" class="gsc-branding"><tbody><tr><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">powered by</div></td><td class="gsc-branding-img"><img src="./Libraries cookbook - Greendizer_files/small-logo.png" class="gsc-branding-img"></td></tr></tbody></table></form><div class="gsc-tabsAreaInvisible"><div class="gsc-tabHeader gsc-inline-block gsc-tabhActive">Custom Search</div><span class="gs-spacer"> </span></div><div class="gsc-tabsAreaInvisible"></div><div class="gsc-above-wrapper-area-invisible"><table cellspacing="0" cellpadding="0" class="gsc-above-wrapper-area-container"><tbody><tr><td class="gsc-result-info-container"><div class="gsc-result-info-invisible"></div></td></tr></tbody></table></div><div class="gsc-adBlockInvisible"></div><div class="gsc-wrapper"><div class="gsc-adBlockInvisible"></div><div class="gsc-resultsbox-invisible"><div class="gsc-resultsRoot gsc-tabData gsc-tabdActive"><table cellspacing="0" cellpadding="0" class="gsc-resultsHeader"><tbody><tr><td class="gsc-twiddleRegionCell"><div class="gsc-twiddle"><div class="gsc-title">Web</div></div><div class="gsc-stats"></div><div class="gsc-results-selector gsc-all-results-active"><div class="gsc-result-selector gsc-one-result" title="show one result">&nbsp;</div><div class="gsc-result-selector gsc-more-results" title="show more results">&nbsp;</div><div class="gsc-result-selector gsc-all-results" title="show all results">&nbsp;</div></div></td><td class="gsc-configLabelCell"></td></tr></tbody></table><div><div class="gsc-expansionArea"></div></div></div></div></div></div></div></div>
+<script src="./Libraries cookbook - Greendizer_files/jsapi" type="text/javascript"></script>
+<script async="true" type="text/javascript"> 
+          google.load('search', '1', {language : 'en'});
+          google.setOnLoadCallback(function() {
+            var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+              '003680668979917808190:068bct4psie', customSearchOptions);
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            customSearchControl.draw('cse');
+          }, true);
+        </script><script src="./Libraries cookbook - Greendizer_files/saved_resource(2)" type="text/javascript"></script><link href="./Libraries cookbook - Greendizer_files/default+en.css" type="text/css" rel="stylesheet"><script src="./Libraries cookbook - Greendizer_files/default+en.I.js" type="text/javascript"></script>
+<link rel="stylesheet" href="./Libraries cookbook - Greendizer_files/www.search.css" type="text/css">
+</div>
+</section>
+<script type="text/javascript">
+	$(document).bind("ready", function(){
+		var request_url = '/docs/libraries/'.split("?")[0];
+		var submenuDOM = $("#sub-menu");
+		
+		var cseDOM = $("#cse");
+		submenuDOM.data("push-test", function(){
+		    return cseDOM.find(".gsc-result-info-invisible").size() !== 0;
+		});
+		
+		target = submenuDOM.find("[href='" + request_url + "']");
+		target.parent().addClass("focus").parent().parent().addClass("focus");
+		target.parent().html(target.parent().html() + '<g:plusone size="small"></g:plusone>');
+	});
+</script>
+<section id="content-items">
+<article class="content-item"><section class="content">
+<h3 id="introduction">Introduction</h3>
+<div>
+<p>The Greendizer libraries Cookbook</p>
+<p>We built Greendizer libraries on top of our API to allow developers to create applications for Greendizer quickly and efficiently. The library is proposed in four languages: Python, Java, PHP, and C#. This guide will walk you through the libraries features and the ways you can integrate them in your projects.</p>
+</div>
+</section></article>
+<article class="content-item"><section class="content">
+<h3>Content</h3>
+<div>
+<ul class="tableofcontent">
+<li><a href="https://www.greendizer.com/docs/libraries/#audience">Audience</a></li>
+<li><a href="https://www.greendizer.com/docs/libraries/#get_started">Get Started</a>
+<ul>
+<li><a href="https://www.greendizer.com/docs/libraries/#client_object">The <code>Client</code> object</a></li>
+<li><a href="https://www.greendizer.com/docs/libraries/#authentication_basic">HTTP basic access authentication</a></li>
+<li><a href="https://www.greendizer.com/docs/libraries/#authentication_oauth">OAuth</a></li>
+</ul>
+</li>
+<li><a href="https://www.greendizer.com/docs/libraries/#general">General</a>
+<ul>
+<li><a href="https://www.greendizer.com/docs/libraries/#general_resources">Resources</a></li>
+<li><a href="https://www.greendizer.com/docs/libraries/#general_containers">Containers</a></li>
+<li><a href="https://www.greendizer.com/docs/libraries/#general_collections">Collections</a></li>
+</ul>
+</li>
+<li><a href="https://www.greendizer.com/docs/libraries/#user_info">User Information</a>
+<ul>
+<li><a href="https://www.greendizer.com/docs/libraries/#buyer_seller_object">The <code>Buyer</code> and <code>Seller</code> objects</a></li>
+<li><a href="https://www.greendizer.com/docs/libraries/#company_object">The <code>Company</code> object</a></li>
+</ul>
+</li>
+<li><a href="https://www.greendizer.com/docs/libraries/#references">References</a></li>
+<li><a href="https://www.greendizer.com/docs/libraries/#notes">Notes</a></li>
+</ul>
+</div>
+</section></article>
+<article class="content-item"><section class="content">
+<h3 id="audience">Audience</h3>
+<div>
+<p>This guide is meant for people familiar with our web applications as well as some basic OOP concepts.</p>
+<p>We also strongly advice you to take a look at the Greendizer API documentation before diving into this guide.</p>
+<p style="margin-top:30px"><a href="https://www.greendizer.com/docs/api/">» API Documentation</a></p>
+</div>
+</section></article>
+<article class="content-item"><section class="content">
+<h3 id="get_started">Get Started</h3>
+<div>
+<h4 id="client_object">The <code>Client</code> Object</h4>
+<p>The <code>Client</code> object is the entry point to the library. You can either initiate a <code>BuyerClient</code> or a <code>SellerClient</code> depending on the context you are in. For more information about contexts, check the <a href="https://www.greendizer.com/docs/libraries/#general_context">API documentation</a>.</p>
+<h4 id="authentication_basic">HTTP basic access authentication</h4>
+<p>To use the basic HTTP access authentication, you need to give your username and password as parameters to the client constructor.</p>
+<div data-group="code-example" class="tab-control" id="1336094251011">
+<ul class="tabs">
+<li data-name="python" class="rounded-top">Python</li>
+<li data-name="php" class="rounded-top">Php</li>
+<li data-name="java" class="rounded-top focus">Java</li>
+
+<li data-name="js" class="rounded-top">Javascript</li>
+</ul>
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 122px; display: none; "><code class="language-py"><span class="kwd">from</span><span class="pln"> greendizer </span><span class="kwd">import</span><span class="pln"> </span><span class="typ">BuyerClient</span><span class="pun">,</span><span class="pln"> </span><span class="typ">SellerClient</span><span class="pln">
+
+
+buyer_client </span><span class="pun">=</span><span class="pln"> </span><span class="typ">BuyerClient</span><span class="pun">(</span><span class="pln">username</span><span class="pun">=</span><span class="str">"jimi.hendrix@springshield.com"</span><span class="pun">,</span><span class="pln"> 
+                           password</span><span class="pun">=</span><span class="str">"password"</span><span class="pun">)</span><span class="pln">
+
+seller_client </span><span class="pun">=</span><span class="pln"> </span><span class="typ">SellerClient</span><span class="pun">(</span><span class="pln">username</span><span class="pun">=</span><span class="str">"jimi.hendrix@springshield.com"</span><span class="pun">,</span><span class="pln">
+                             password</span><span class="pun">=</span><span class="str">"password"</span><span class="pun">)</span></code></pre>
+<pre class="prettyprint rounded-top tab-panel" style="display: none; "><code class="language-php"><span class="pln">require_once </span><span class="str">'Greendizer/BuyerClient.php'</span><span class="pun">;</span><span class="pln">
+require_once </span><span class="str">'Greendizer/SellerClient.php'</span><span class="pun">;</span><span class="pln">
+
+$buyer_client </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Greendizer_BuyerClient</span><span class="pun">(</span><span class="pln">
+                        array</span><span class="pun">(</span><span class="pln">
+                            </span><span class="str">'email'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">"jimi.hendrix@springshield.com"</span><span class="pun">,</span><span class="pln">
+                            </span><span class="str">'password'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">"password"</span><span class="pln">
+                        </span><span class="pun">)</span><span class="pln">
+</span><span class="pun">);</span><span class="pln">
+
+$seller_client </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Greendizer_SellerClient</span><span class="pun">(</span><span class="pln">
+                        array</span><span class="pun">(</span><span class="pln">
+                            </span><span class="str">'email'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln">  </span><span class="str">"jimi.hendrix@springshield.com"</span><span class="pun">,</span><span class="pln">
+                            </span><span class="str">'password'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">"password"</span><span class="pln">
+                        </span><span class="pun">)</span><span class="pln">
+</span><span class="pun">);</span></code></pre>
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 52px; display: block; "><code class="language-java"><span class="kwd">import</span><span class="pln"> com</span><span class="pun">.</span><span class="pln">greendizer</span><span class="pun">.</span><span class="pln">api</span><span class="pun">.</span><span class="pln">client</span><span class="pun">.</span><span class="typ">BuyerClient</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> com</span><span class="pun">.</span><span class="pln">greendizer</span><span class="pun">.</span><span class="pln">api</span><span class="pun">.</span><span class="pln">client</span><span class="pun">.</span><span class="typ">SellerClient</span><span class="pun">;</span><span class="pln">
+
+
+</span><span class="typ">BuyerClient</span><span class="pln"> buyerClient </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">BuyerClient</span><span class="pun">(</span><span class="pln">
+    </span><span class="str">"jimi.hendrix@springshield.com"</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"password"</span><span class="pln">
+</span><span class="pun">);</span><span class="pln">
+
+</span><span class="typ">SellerClient</span><span class="pln"> sellerClient </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">SellerClient</span><span class="pun">(</span><span class="pln">
+      </span><span class="str">"jimi.hendrix@springshield.com"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"password"</span><span class="pln">
+</span><span class="pun">);</span></code></pre>
+
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 220px; display: none; "><code class="language-js"><span class="com">//Not supported in JavaScript.</span></code></pre>
+</div>
+<h4 id="authentication_oauth">OAuth</h4>
+<p>When you register your application, you can use an <a href="https://www.greendizer.com/docs/libraries/#authentication_oauth">OAuth</a> access token for authentication.</p>
+<div data-group="code-example" class="tab-control" id="1336094251060">
+<ul class="tabs">
+<li data-name="python" class="rounded-top">Python</li>
+<li data-name="php" class="rounded-top">Php</li>
+<li data-name="java" class="rounded-top focus">Java</li>
+
+<li data-name="js" class="rounded-top">Javascript</li>
+</ul>
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 458px; display: none; "><code class="language-py"><span class="kwd">from</span><span class="pln"> greendizer </span><span class="kwd">import</span><span class="pln"> </span><span class="typ">BuyerClient</span><span class="pun">,</span><span class="pln"> </span><span class="typ">SellerClient</span><span class="pln">
+
+
+buyer_client </span><span class="pun">=</span><span class="pln"> </span><span class="typ">BuyerClient</span><span class="pun">(</span><span class="pln">oauth_token</span><span class="pun">=</span><span class="str">"oauth_token"</span><span class="pun">)</span><span class="pln">
+
+seller_client </span><span class="pun">=</span><span class="pln"> </span><span class="typ">SellerClient</span><span class="pun">(</span><span class="pln">oauth_token</span><span class="pun">=</span><span class="str">"oauth_token"</span><span class="pun">)</span></code></pre>
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 458px; display: none; "><code class="language-php"><span class="pln">require_once </span><span class="str">'Greendizer/BuyerClient.php'</span><span class="pun">;</span><span class="pln">
+require_once </span><span class="str">'Greendizer/SellerClient.php'</span><span class="pun">;</span><span class="pln">
+
+$buyer_client </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Greendizer_BuyerClient</span><span class="pun">(</span><span class="pln">array</span><span class="pun">(</span><span class="str">'token'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> $oauth_token</span><span class="pun">));</span><span class="pln">
+
+$seller_client </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Greendizer_SellerClient</span><span class="pun">(</span><span class="pln">array</span><span class="pun">(</span><span class="str">'token'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> $oauth_token</span><span class="pun">));</span></code></pre>
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 472px; display: block; "><code class="language-java"><span class="kwd">import</span><span class="pln"> com</span><span class="pun">.</span><span class="pln">greendizer</span><span class="pun">.</span><span class="pln">api</span><span class="pun">.</span><span class="pln">client</span><span class="pun">.</span><span class="typ">SellerClient</span><span class="pun">;</span><span class="pln">
+
+</span><span class="typ">BuyerClient</span><span class="pln"> buyerClient </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">BuyerClient</span><span class="pun">(</span><span class="pln">token</span><span class="pun">);</span><span class="pln">
+
+</span><span class="typ">SellerClient</span><span class="pln"> sellerClient </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">SellerClient</span><span class="pun">(</span><span class="pln">token</span><span class="pun">);</span></code></pre>
+
+<pre class="prettyprint rounded-top tab-panel" style="display: none; "><code class="language-js"><span class="pun">&lt;</span><span class="pln">head</span><span class="pun">&gt;</span><span class="pln">
+    </span><span class="pun">&lt;</span><span class="pln">script type</span><span class="pun">=</span><span class="str">"text/javascript"</span><span class="pln"> src</span><span class="pun">=</span><span class="str">"https://js.greendizer.com/v1/"</span><span class="pun">&gt;&lt;/</span><span class="pln">script</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&lt;</span><span class="str">/head&gt;
+&lt;body&gt;
+    &lt;script type="text/</span><span class="pln">javascript</span><span class="str">"&gt;</span><span class="pln">
+        </span><span class="com">/*
+        Available classes:
+            "greendizer.oauth.BuyerApplication"     : to access the buyers API
+            "greendizer.oauth.SellerApplication"    : to access the sellers API
+        */</span><span class="pln">
+        
+        </span><span class="com">//Initialize an application with an existing token</span><span class="pln">
+        </span><span class="kwd">var</span><span class="pln"> buyerApp </span><span class="pun">=</span><span class="pln"> greendizer</span><span class="pun">.</span><span class="pln">oauth</span><span class="pun">.</span><span class="typ">BuyerApplication</span><span class="pun">({</span><span class="str">"oAuthToken"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"123456"</span><span class="pun">,</span><span class="pln">
+                                                          </span><span class="str">"userId"</span><span class="pun">:</span><span class="str">"me"</span><span class="pun">});</span><span class="pln">
+        
+        </span><span class="com">/*
+        Initialize an application that will handle the OAuth process for you.
+        In the settings panel, your application must indicate "user_agent" as its type.
+        */</span><span class="pln">                                                           
+        </span><span class="kwd">var</span><span class="pln"> sellerApp </span><span class="pun">=</span><span class="pln"> greendizer</span><span class="pun">.</span><span class="pln">oauth</span><span class="pun">.</span><span class="typ">SellerApplication</span><span class="pun">({</span><span class="str">"oAuthClientId"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"12"</span><span class="pun">,</span><span class="pln">
+                                                            </span><span class="str">"oAuthRedirectUri"</span><span class="pun">:</span><span class="str">"http://url.example.com"</span><span class="pun">,</span><span class="pln">
+                                                            </span><span class="str">"oAuthScopes"</span><span class="pun">:</span><span class="str">"read_invoices"</span><span class="pun">});</span><span class="pln">
+        
+        </span><span class="com">/*
+        * Called when the application is ready
+        * @param {Boolean} state A value indicating whether the authentication succeeded or not.
+        * @param {String} error The error message if the authentication failed (state === false). 
+        */</span><span class="pln">
+        </span><span class="kwd">var</span><span class="pln"> onApplicationReady </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">state</span><span class="pun">,</span><span class="pln"> error</span><span class="pun">){</span><span class="pln">
+            </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">state</span><span class="pun">){</span><span class="pln">
+                </span><span class="com">//Your code here...</span><span class="pln">
+            </span><span class="pun">}</span><span class="pln">
+        </span><span class="pun">};</span><span class="pln">
+                                                               
+        buyerApp</span><span class="pun">.</span><span class="pln">init</span><span class="pun">(</span><span class="pln">onApplicationReady</span><span class="pun">);</span><span class="pln">
+        sellerApp</span><span class="pun">.</span><span class="pln">init</span><span class="pun">(</span><span class="pln">onApplicationReady</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">&lt;</span><span class="str">/script&gt;
+&lt;/</span><span class="pln">body</span><span class="pun">&gt;</span></code></pre>
+</div>
+</div>
+</section></article>
+<article class="content-item"><section class="content">
+<h3 id="general">General</h3>
+<div>
+<h4 id="general_resources">Resources</h4>
+<p>The resources Greendizer exposes are represented in the libraries by the below objects. The objects attributes are listed in the <a href="https://www.greendizer.com/docs/api/">API documentation</a>.</p>
+<ul>
+<li><code>Buyer</code></li>
+<li><code>Seller</code></li>
+<li><code>Settings</code></li>
+<li><code>Company</code></li>
+<li><code>Email</code></li>
+<li><code>Invoice</code></li>
+<li><code>Thread</code></li>
+<li><code>Message</code></li>
+</ul>
+<h4 id="general_containers">Containers</h4>
+<p>Containers are meant to be the way to access resources and collections. They expose methods to access resources by id or collections by query string or simply to get the count of resources.</p>
+<p>Containers are resource attributes; they therefore allow chained calls. The following code snippet retrieves a given invoice . The <code>emails()</code> and <code>invoices()</code> methods return <code>Container</code> objects while the method <code>getById()</code> returns a resource.</p>
+<div data-group="code-example" class="tab-control" id="1336094251095">
+<ul class="tabs">
+<li data-name="python" class="rounded-top">Python</li>
+<li data-name="php" class="rounded-top">Php</li>
+<li data-name="java" class="rounded-top focus">Java</li>
+
+<li data-name="js" class="rounded-top">Javascript</li>
+</ul>
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 122px; display: none; "><code class="language-py"><span class="kwd">from</span><span class="pln"> greendizer </span><span class="kwd">import</span><span class="pln"> </span><span class="typ">BuyerClient</span><span class="pln">
+
+
+user </span><span class="pun">=</span><span class="pln"> </span><span class="typ">BuyerClient</span><span class="pun">(</span><span class="pln">oauth_token</span><span class="pun">=</span><span class="str">"oauth_token"</span><span class="pun">).</span><span class="pln">user
+
+</span><span class="com">#Retrieve the email address to which the invoice was sent</span><span class="pln">
+email </span><span class="pun">=</span><span class="pln"> user</span><span class="pun">.</span><span class="pln">emails</span><span class="pun">[</span><span class="str">'1234567890'</span><span class="pun">]</span><span class="pln">
+
+</span><span class="com">#Retrieve the desired invoice using its ID</span><span class="pln">
+invoice </span><span class="pun">=</span><span class="pln"> email</span><span class="pun">.</span><span class="pln">invoices</span><span class="pun">[</span><span class="str">'9891'</span><span class="pun">]</span></code></pre>
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 122px; display: none; "><code class="language-php"><span class="pln">require_once </span><span class="str">'Greendizer/BuyerClient.php'</span><span class="pun">;</span><span class="pln">
+
+$buyerClient </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Greendizer_BuyerClient</span><span class="pun">(</span><span class="pln">array</span><span class="pun">(</span><span class="str">'token'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> $oauth_token</span><span class="pun">));</span><span class="pln">
+$user </span><span class="pun">=</span><span class="pln"> $buyerClient</span><span class="pun">-&gt;</span><span class="pln">getUser</span><span class="pun">();</span><span class="pln">
+
+</span><span class="com">//Retrieve the email address to which the invoice was sent</span><span class="pln">
+$email </span><span class="pun">=</span><span class="pln"> $user</span><span class="pun">-&gt;</span><span class="pln">emails</span><span class="pun">()-&gt;</span><span class="pln">getById</span><span class="pun">(</span><span class="str">'1234567890'</span><span class="pun">);</span><span class="pln">
+
+</span><span class="com">//Retrieve the desired invoice using its ID</span><span class="pln">
+$invoice </span><span class="pun">=</span><span class="pln"> $email</span><span class="pun">-&gt;</span><span class="pln">invoices</span><span class="pun">()-&gt;</span><span class="pln">getById</span><span class="pun">(</span><span class="str">'9891'</span><span class="pun">);</span></code></pre>
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 108px; display: block; "><code class="language-java"><span class="kwd">import</span><span class="pln"> com</span><span class="pun">.</span><span class="pln">greendizer</span><span class="pun">.</span><span class="pln">api</span><span class="pun">.</span><span class="pln">resource</span><span class="pun">.</span><span class="pln">buyer</span><span class="pun">.</span><span class="typ">Buyer</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> com</span><span class="pun">.</span><span class="pln">greendizer</span><span class="pun">.</span><span class="pln">api</span><span class="pun">.</span><span class="pln">resource</span><span class="pun">.</span><span class="pln">buyer</span><span class="pun">.</span><span class="typ">Email</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> com</span><span class="pun">.</span><span class="pln">greendizer</span><span class="pun">.</span><span class="pln">api</span><span class="pun">.</span><span class="pln">resource</span><span class="pun">.</span><span class="pln">buyer</span><span class="pun">.</span><span class="typ">Invoice</span><span class="pun">;</span><span class="pln">
+
+</span><span class="typ">Buyer</span><span class="pln"> user </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">BuyerClient</span><span class="pun">(</span><span class="str">"oauth_token"</span><span class="pun">).</span><span class="pln">getUser</span><span class="pun">();</span><span class="pln">
+
+</span><span class="com">//Retrieve the email address to which the email was sent</span><span class="pln">
+</span><span class="typ">Email</span><span class="pln"> email </span><span class="pun">=</span><span class="pln"> user</span><span class="pun">.</span><span class="pln">getEmails</span><span class="pun">().</span><span class="pln">getById</span><span class="pun">(</span><span class="str">"1234567890"</span><span class="pun">);</span><span class="pln">
+
+</span><span class="com">//Retrieve the desired invoice using its ID</span><span class="pln">
+</span><span class="typ">Invoice</span><span class="pln"> invoice </span><span class="pun">=</span><span class="pln"> email</span><span class="pun">.</span><span class="pln">getInvoices</span><span class="pun">().</span><span class="pln">get</span><span class="pun">(</span><span class="str">"9891"</span><span class="pun">);</span></code></pre>
+
+<pre class="prettyprint rounded-top tab-panel" style="display: none; "><code class="language-js"><span class="pln">application</span><span class="pun">.</span><span class="pln">init</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">state</span><span class="pun">,</span><span class="pln"> error</span><span class="pun">){</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">state</span><span class="pun">){</span><span class="pln">
+        </span><span class="kwd">var</span><span class="pln"> user </span><span class="pun">=</span><span class="pln"> application</span><span class="pun">.</span><span class="pln">getUser</span><span class="pun">();</span><span class="pln">
+        </span><span class="kwd">var</span><span class="pln"> email </span><span class="pun">=</span><span class="pln"> user</span><span class="pun">.</span><span class="pln">getEmails</span><span class="pun">().</span><span class="pln">getItemByID</span><span class="pun">(</span><span class="str">"1234567890"</span><span class="pun">);</span><span class="pln">
+        
+        </span><span class="com">//Retrieve the desired invoice using its ID.</span><span class="pln">
+        </span><span class="kwd">var</span><span class="pln"> invoice </span><span class="pun">=</span><span class="pln"> email</span><span class="pun">.</span><span class="pln">getInvoices</span><span class="pun">().</span><span class="pln">getItemByID</span><span class="pun">(</span><span class="str">"9891"</span><span class="pun">,</span><span class="pln"> successFn</span><span class="pun">,</span><span class="pln"> failureFn</span><span class="pun">);</span><span class="pln">
+        
+        </span><span class="com">/*
+        * 'successFn' and 'failureFn' are optional callbacks.
+        * If omitted, the resource will be retrieved from the local cache,
+        * or otherwise instantiated.
+        
+        * You can always call the "load(successFn, failureFn)" method later on
+        * if you wish to involve the server.
+        */</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+</div>
+<h4 id="general_collections">Collections</h4>
+<p>The libraries represent collections as objects that contain a list of resources. Collections are returned by the <code>All</code> property and <code>search()</code> method of containers.</p>
+<p>To access the collection resources, you first need to populate it. The collections <code>populate()</code> method retrieves the resources contained in the collection.</p>
+<div data-group="code-example" class="tab-control" id="1336094251127">
+<ul class="tabs">
+<li data-name="python" class="rounded-top">Python</li>
+<li data-name="php" class="rounded-top">Php</li>
+<li data-name="java" class="rounded-top focus">Java</li>
+
+<li data-name="js" class="rounded-top">Javascript</li>
+</ul>
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 94px; display: none; "><code class="language-py"><span class="kwd">from</span><span class="pln"> greendizer </span><span class="kwd">import</span><span class="pln"> </span><span class="typ">BuyerClient</span><span class="pln">
+
+
+</span><span class="kwd">def</span><span class="pln"> get_all_invoices</span><span class="pun">():</span><span class="pln">
+    </span><span class="str">'''
+    Returns all the invoices sent to 
+    jimi.hendrix@springshield.com
+    '''</span><span class="pln">
+    user </span><span class="pun">=</span><span class="pln"> </span><span class="typ">BuyerClient</span><span class="pun">(</span><span class="pln">oauth_token</span><span class="pun">=</span><span class="str">'oauth_token'</span><span class="pun">).</span><span class="pln">user
+    email </span><span class="pun">=</span><span class="pln"> user</span><span class="pun">.</span><span class="pln">emails</span><span class="pun">[</span><span class="str">'jimi.hendrix@springshield.com'</span><span class="pun">]</span><span class="pln">
+
+    </span><span class="com">#Instantiate a collection</span><span class="pln">
+    collection </span><span class="pun">=</span><span class="pln"> email</span><span class="pun">.</span><span class="pln">invoices</span><span class="pun">.</span><span class="pln">all
+    
+    collection</span><span class="pun">.</span><span class="pln">populate</span><span class="pun">()</span><span class="pln">       </span><span class="com">#Calling the populate() method with no parameters</span><span class="pln">
+                                </span><span class="com">#will load the last 200 resources available. </span><span class="pln">
+
+    </span><span class="com">#Access the retrieved invoices</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> collection</span><span class="pun">.</span><span class="pln">resources</span></code></pre>
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 122px; display: none; "><code class="language-php"><span class="pln">require_once </span><span class="str">'Greendizer/BuyerClient.php'</span><span class="pun">;</span><span class="pln">
+
+</span><span class="kwd">function</span><span class="pln"> get_all_invoices</span><span class="pun">(){</span><span class="pln">
+
+    $buyerClient </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Greendizer_BuyerClient</span><span class="pun">(</span><span class="pln">array</span><span class="pun">(</span><span class="str">'token'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> $oauth_token</span><span class="pun">));</span><span class="pln">
+	$user </span><span class="pun">=</span><span class="pln"> $buyerClient</span><span class="pun">-&gt;</span><span class="pln">getUser</span><span class="pun">();</span><span class="pln">
+    $email </span><span class="pun">=</span><span class="pln"> $user</span><span class="pun">-&gt;</span><span class="pln">emails</span><span class="pun">()-&gt;</span><span class="pln">getById</span><span class="pun">(</span><span class="str">'jimi.hendrix@springshield.com'</span><span class="pun">);</span><span class="pln">
+    
+    </span><span class="com">//Instantiate a collection</span><span class="pln">
+    $collection </span><span class="pun">=</span><span class="pln"> $email</span><span class="pun">-&gt;</span><span class="pln">invoices</span><span class="pun">()-&gt;</span><span class="pln">getAll</span><span class="pun">();</span><span class="pln">
+    
+    $collection</span><span class="pun">-&gt;</span><span class="pln">populate</span><span class="pun">();</span><span class="pln">    </span><span class="com">//Calling the populate() method with no parameters</span><span class="pln">
+                                   </span><span class="com">//will load the last 200 resources available. </span><span class="pln">
+    
+    </span><span class="com">//Access the retrieved invoices</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> $collection</span><span class="pun">-&gt;</span><span class="pln">getResources</span><span class="pun">();</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+<pre class="prettyprint rounded-top tab-panel" style="display: block; "><code class="language-java"><span class="kwd">import</span><span class="pln"> com</span><span class="pun">.</span><span class="pln">greendizer</span><span class="pun">.</span><span class="pln">api</span><span class="pun">.</span><span class="pln">client</span><span class="pun">.</span><span class="typ">BuyerClient</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> com</span><span class="pun">.</span><span class="pln">greendizer</span><span class="pun">.</span><span class="pln">api</span><span class="pun">.</span><span class="pln">resource</span><span class="pun">.</span><span class="pln">buyer</span><span class="pun">.</span><span class="typ">Buyer</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> com</span><span class="pun">.</span><span class="pln">greendizer</span><span class="pun">.</span><span class="pln">api</span><span class="pun">.</span><span class="pln">resource</span><span class="pun">.</span><span class="pln">buyer</span><span class="pun">.</span><span class="typ">Email</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> com</span><span class="pun">.</span><span class="pln">greendizer</span><span class="pun">.</span><span class="pln">api</span><span class="pun">.</span><span class="pln">resource</span><span class="pun">.</span><span class="pln">buyer</span><span class="pun">.</span><span class="typ">Invoice</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> com</span><span class="pun">.</span><span class="pln">greendizer</span><span class="pun">.</span><span class="pln">api</span><span class="pun">.</span><span class="pln">dal</span><span class="pun">.</span><span class="typ">Collection</span><span class="pun">;</span><span class="pln">
+
+</span><span class="com">/**
+ * Returns all the invoices sent to
+ * jimi.hendrix@springshield.com
+ */</span><span class="pln">
+</span><span class="kwd">public</span><span class="pln"> </span><span class="typ">Collection</span><span class="pun">&lt;</span><span class="typ">Invoice</span><span class="pun">&gt;</span><span class="pln"> getAllInvoices</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="typ">Buyer</span><span class="pln"> buyer </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">BuyerClient</span><span class="pun">(</span><span class="str">"oauth_token"</span><span class="pun">).</span><span class="pln">getUser</span><span class="pun">();</span><span class="pln">
+  </span><span class="typ">Email</span><span class="pln"> email </span><span class="pun">=</span><span class="pln"> buyer</span><span class="pun">.</span><span class="pln">getEmails</span><span class="pun">().</span><span class="pln">get</span><span class="pun">(</span><span class="str">"jimi.hendrix@springshield.com"</span><span class="pun">);</span><span class="pln">
+
+  </span><span class="com">//Instantiate a collection</span><span class="pln">
+  </span><span class="typ">Collection</span><span class="pun">&lt;</span><span class="typ">Invoice</span><span class="pun">&gt;</span><span class="pln"> collection </span><span class="pun">=</span><span class="pln"> email</span><span class="pun">.</span><span class="pln">getInvoices</span><span class="pun">().</span><span class="pln">all</span><span class="pun">();</span><span class="pln">
+
+  </span><span class="com">//Calling the populate() method with no parameters</span><span class="pln">
+  </span><span class="com">//will load the last 200 resources available</span><span class="pln">
+  collection</span><span class="pun">.</span><span class="pln">populate</span><span class="pun">();</span><span class="pln">
+
+  </span><span class="com">//Access invoices as you would do through a java.util.List</span><span class="pln">
+  </span><span class="com">//as Collection implements this interface.</span><span class="pln">
+  </span><span class="kwd">return</span><span class="pln"> collection</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 52px; display: none; "><code class="language-js"><span class="com">/*
+* Returns all the invoices sent to a "jimi.hendrix@greendizer.com"
+* @param {greendizer.oauth.BuyerApplication} buyerApplication Instance of a buyer application.
+* @param {Function} callbackFn Callback function
+* @returns {Array} Array of invoices. 
+*/</span><span class="pln">
+</span><span class="kwd">function</span><span class="pln"> getAllInvoices</span><span class="pun">(</span><span class="pln">buyerApplication</span><span class="pun">,</span><span class="pln"> callbackFn</span><span class="pun">){</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">application</span><span class="pun">.</span><span class="pln">isAuthenticated</span><span class="pun">()){</span><span class="pln">
+        </span><span class="kwd">var</span><span class="pln"> user </span><span class="pun">=</span><span class="pln"> application</span><span class="pun">.</span><span class="pln">getUser</span><span class="pun">();</span><span class="pln">
+        </span><span class="kwd">var</span><span class="pln"> email </span><span class="pun">=</span><span class="pln"> user</span><span class="pun">.</span><span class="pln">getEmails</span><span class="pun">().</span><span class="pln">getItemByID</span><span class="pun">(</span><span class="str">"jimi.hendrix@greendizer.com"</span><span class="pun">);</span><span class="pln">
+        
+        </span><span class="com">//Instantiate a  collection</span><span class="pln">
+        </span><span class="kwd">var</span><span class="pln"> collection </span><span class="pun">=</span><span class="pln"> email</span><span class="pun">.</span><span class="pln">getInvoices</span><span class="pun">().</span><span class="pln">getAll</span><span class="pun">();</span><span class="pln">
+        
+        collection</span><span class="pun">.</span><span class="pln">populate</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(){</span><span class="pln">                 </span><span class="com">//Calling the populate() method with no </span><span class="pln">
+            callbackFn</span><span class="pun">(</span><span class="pln">collection</span><span class="pun">.</span><span class="pln">getResources</span><span class="pun">());</span><span class="pln">      </span><span class="com">//additional parameters will load the</span><span class="pln">
+        </span><span class="pun">},</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">response</span><span class="pun">){</span><span class="pln">                          </span><span class="com">//last 200 resources available.</span><span class="pln">
+            </span><span class="com">//Error occured...</span><span class="pln">
+            console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">response</span><span class="pun">.</span><span class="pln">getStatusCode</span><span class="pun">());</span><span class="pln">
+        </span><span class="pun">});</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">};</span></code></pre>
+</div>
+</div>
+</section></article>
+<article class="content-item"><section class="content">
+<h3 id="user_info">User Information</h3>
+<div>
+<h4 id="buyer_seller_object">The <code>Buyer</code> and <code>Seller</code> objects</h4>
+<p>Through the instantiated client, you can access the <code>Buyer</code> and <code>Seller</code> objects. You can then access information such as the first name or the birthday of the current user.</p>
+<div data-group="code-example" class="tab-control" id="1336094251175">
+<ul class="tabs">
+<li data-name="python" class="rounded-top">Python</li>
+<li data-name="php" class="rounded-top">Php</li>
+<li data-name="java" class="rounded-top focus">Java</li>
+
+<li data-name="js" class="rounded-top">Javascript</li>
+</ul>
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 38px; display: none; "><code class="language-py"><span class="kwd">from</span><span class="pln"> greendizer </span><span class="kwd">import</span><span class="pln"> </span><span class="typ">BuyerClient</span><span class="pln">
+
+</span><span class="com">#Initialize a BuyerClient instance</span><span class="pln">
+user </span><span class="pun">=</span><span class="pln"> </span><span class="typ">BuyerClient</span><span class="pun">(</span><span class="pln">oauth_token</span><span class="pun">=</span><span class="str">'oauth_token'</span><span class="pun">).</span><span class="pln">user
+
+</span><span class="com">#Print details about the current user</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> user</span><span class="pun">.</span><span class="pln">firstname
+</span><span class="kwd">print</span><span class="pln"> user</span><span class="pun">.</span><span class="pln">lastname</span></code></pre>
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 24px; display: none; "><code class="language-php"><span class="pln">require_once </span><span class="str">'Greendizer/BuyerClient.php'</span><span class="pun">;</span><span class="pln">
+
+</span><span class="com">//Initialize a BuyerClient instance</span><span class="pln">
+$buyerClient </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Greendizer_BuyerClient</span><span class="pun">(</span><span class="pln">array</span><span class="pun">(</span><span class="str">'token'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> $oauth_token</span><span class="pun">));</span><span class="pln">
+$user </span><span class="pun">=</span><span class="pln"> $buyerClient</span><span class="pun">-&gt;</span><span class="pln">getUser</span><span class="pun">();</span><span class="pln">
+
+</span><span class="com">//Print details about the current user  </span><span class="pln">
+echo $user</span><span class="pun">-&gt;</span><span class="pln">getFirstName</span><span class="pun">();</span><span class="pln">
+echo $user</span><span class="pun">-&gt;</span><span class="pln">getLastName</span><span class="pun">();</span></code></pre>
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 24px; display: block; "><code class="language-java"><span class="kwd">import</span><span class="pln"> com</span><span class="pun">.</span><span class="pln">greendizer</span><span class="pun">.</span><span class="pln">api</span><span class="pun">.</span><span class="pln">client</span><span class="pun">.</span><span class="typ">BuyerClient</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> com</span><span class="pun">.</span><span class="pln">greendizer</span><span class="pun">.</span><span class="pln">api</span><span class="pun">.</span><span class="pln">resource</span><span class="pun">.</span><span class="pln">buyer</span><span class="pun">.</span><span class="typ">Buyer</span><span class="pun">;</span><span class="pln">
+
+</span><span class="com">//Initialize a BuyerClient instance</span><span class="pln">
+</span><span class="typ">Buyer</span><span class="pln"> buyer </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">BuyerClient</span><span class="pun">(</span><span class="str">"oauth_token"</span><span class="pun">).</span><span class="pln">getUser</span><span class="pun">();</span><span class="pln">
+
+</span><span class="com">//Print details about the current user</span><span class="pln">
+</span><span class="typ">System</span><span class="pun">.</span><span class="pln">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">buyer</span><span class="pun">.</span><span class="pln">getFirstName</span><span class="pun">());</span><span class="pln">
+</span><span class="typ">System</span><span class="pun">.</span><span class="pln">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">buyer</span><span class="pun">.</span><span class="pln">getLastName</span><span class="pun">());</span></code></pre>
+
+<pre class="prettyprint rounded-top tab-panel" style="display: none; "><code class="language-js"><span class="pln">application</span><span class="pun">.</span><span class="pln">init</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">state</span><span class="pun">,</span><span class="pln"> error</span><span class="pun">){</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">state</span><span class="pun">){</span><span class="pln">
+        </span><span class="com">//Passing a callback will allow the resource to be loaded from the server</span><span class="pln">
+        application</span><span class="pun">.</span><span class="pln">getUser</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">user</span><span class="pun">){</span><span class="pln">
+            </span><span class="com">//Print details about the current user</span><span class="pln">
+            console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">user</span><span class="pun">.</span><span class="pln">getFirstname</span><span class="pun">());</span><span class="pln">
+            console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">user</span><span class="pun">.</span><span class="pln">getLastname</span><span class="pun">());</span><span class="pln">
+        </span><span class="pun">});</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+</div>
+<h4 id="company_object">The <code>Company</code> object</h4>
+<p>The <code>Company</code> object includes the information about the company a specific seller belongs to.</p>
+<div data-group="code-example" class="tab-control" id="1336094251212">
+<ul class="tabs">
+<li data-name="python" class="rounded-top">Python</li>
+<li data-name="php" class="rounded-top">Php</li>
+<li data-name="java" class="rounded-top focus">Java</li>
+
+<li data-name="js" class="rounded-top">Javascript</li>
+</ul>
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 52px; display: none; "><code class="language-py"><span class="kwd">from</span><span class="pln"> greendizer </span><span class="kwd">import</span><span class="pln"> </span><span class="typ">SellerClient</span><span class="pln">            
+            
+</span><span class="com">#Initialize a SellerClient instance</span><span class="pln">
+user </span><span class="pun">=</span><span class="pln"> </span><span class="typ">SellerClient</span><span class="pun">(</span><span class="pln">oauth_token</span><span class="pun">=</span><span class="str">'oauth_token'</span><span class="pun">).</span><span class="pln">user
+
+</span><span class="com">#Print details about the current user</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> user</span><span class="pun">.</span><span class="pln">firstname
+
+</span><span class="com">#Print details about his company</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> user</span><span class="pun">.</span><span class="pln">company</span><span class="pun">.</span><span class="pln">name</span></code></pre>
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 80px; display: none; "><code class="language-php"><span class="pln">require_once </span><span class="str">'Greendizer/SellerClient.php'</span><span class="pun">;</span><span class="pln">
+
+</span><span class="com">//Initialize a SellerClient instance</span><span class="pln">
+$sellerClient </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Greendizer_SellerClient</span><span class="pun">(</span><span class="pln">array</span><span class="pun">(</span><span class="str">'token'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> $oauth_token</span><span class="pun">));</span><span class="pln">
+$user </span><span class="pun">=</span><span class="pln"> $sellerClient</span><span class="pun">-&gt;</span><span class="pln">getUser</span><span class="pun">();</span><span class="pln">
+
+</span><span class="com">//Print details about their company</span><span class="pln">
+echo $user</span><span class="pun">-&gt;</span><span class="pln">getCompany</span><span class="pun">()-&gt;</span><span class="pln">getName</span><span class="pun">();</span></code></pre>
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 38px; display: block; "><code class="language-java"><span class="kwd">import</span><span class="pln"> com</span><span class="pun">.</span><span class="pln">greendizer</span><span class="pun">.</span><span class="pln">api</span><span class="pun">.</span><span class="pln">client</span><span class="pun">.</span><span class="typ">SellerClient</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> com</span><span class="pun">.</span><span class="pln">greendizer</span><span class="pun">.</span><span class="pln">api</span><span class="pun">.</span><span class="pln">resource</span><span class="pun">.</span><span class="pln">sellers</span><span class="pun">.</span><span class="typ">Seller</span><span class="pun">;</span><span class="pln">
+
+</span><span class="com">//Initialize a BuyerClient instance</span><span class="pln">
+</span><span class="typ">Seller</span><span class="pln"> seller </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">SellerClient</span><span class="pun">(</span><span class="str">"oauth_token"</span><span class="pun">).</span><span class="pln">getUser</span><span class="pun">();</span><span class="pln">
+
+</span><span class="com">//Print details about the current user</span><span class="pln">
+</span><span class="typ">System</span><span class="pun">.</span><span class="pln">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">seller</span><span class="pun">.</span><span class="pln">getFirstName</span><span class="pun">());</span><span class="pln">
+
+</span><span class="com">//Print details about his company</span><span class="pln">
+</span><span class="typ">System</span><span class="pun">.</span><span class="pln">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">seller</span><span class="pun">.</span><span class="pln">getCompany</span><span class="pun">().</span><span class="pln">getName</span><span class="pun">());</span></code></pre>
+
+<pre class="prettyprint rounded-top tab-panel" style="display: none; "><code class="language-js"><span class="pln">application</span><span class="pun">.</span><span class="pln">init</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">state</span><span class="pun">,</span><span class="pln"> error</span><span class="pun">){</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">state</span><span class="pun">){</span><span class="pln">
+        application</span><span class="pun">.</span><span class="pln">getUser</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">user</span><span class="pun">){</span><span class="pln">
+            </span><span class="com">//Print details about the current user</span><span class="pln">
+            console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">user</span><span class="pun">.</span><span class="pln">getFirstname</span><span class="pun">());</span><span class="pln">
+            
+            user</span><span class="pun">.</span><span class="pln">getCompany</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">company</span><span class="pun">){</span><span class="pln">
+                </span><span class="com">//Print details about the company</span><span class="pln">
+                console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">company</span><span class="pun">.</span><span class="pln">getName</span><span class="pun">());</span><span class="pln">
+            </span><span class="pun">});</span><span class="pln">
+        </span><span class="pun">});</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+</div>
+<h4 id="settings_object">The <code>Settings</code> object</h4>
+<p>The <code>Settings</code> object represents the current user settings.</p>
+<div data-group="code-example" class="tab-control" id="1336094251238">
+<ul class="tabs">
+<li data-name="python" class="rounded-top">Python</li>
+<li data-name="php" class="rounded-top">Php</li>
+<li data-name="java" class="rounded-top focus">Java</li>
+
+<li data-name="js" class="rounded-top">Javascript</li>
+</ul>
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 94px; display: none; "><code class="language-py"><span class="pln">
+settings </span><span class="pun">=</span><span class="pln"> </span><span class="typ">BuyerClient</span><span class="pun">(</span><span class="pln">oauth_token</span><span class="pun">=</span><span class="str">'oauth_token'</span><span class="pun">).</span><span class="pln">user</span><span class="pun">.</span><span class="pln">settings
+
+</span><span class="com">#Print elements of the user-defined settings</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> settings</span><span class="pun">.</span><span class="pln">language</span></code></pre>
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 24px; display: none; "><code class="language-php"><span class="pln">require_once </span><span class="str">'Greendizer/BuyerClient.php'</span><span class="pun">;</span><span class="pln">
+
+</span><span class="com">//Initialize a BuyerClient instance</span><span class="pln">
+$buyerClient </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Greendizer_BuyerClient</span><span class="pun">(</span><span class="pln">array</span><span class="pun">(</span><span class="str">'token'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> $oauth_token</span><span class="pun">));</span><span class="pln">
+$user </span><span class="pun">=</span><span class="pln"> $buyerClient</span><span class="pun">-&gt;</span><span class="pln">getUser</span><span class="pun">();</span><span class="pln">
+
+$settings </span><span class="pun">=</span><span class="pln"> $user</span><span class="pun">-&gt;</span><span class="pln">getSettings</span><span class="pun">();</span><span class="pln">
+
+</span><span class="com">//Print elements of the user-defined settings</span><span class="pln">
+echo $settings</span><span class="pun">-&gt;</span><span class="pln">getLanguage</span><span class="pun">();</span></code></pre>
+<pre class="prettyprint rounded-top tab-panel" style="display: block; "><code class="language-java"><span class="kwd">import</span><span class="pln"> com</span><span class="pun">.</span><span class="pln">greendizer</span><span class="pun">.</span><span class="pln">api</span><span class="pun">.</span><span class="pln">client</span><span class="pun">.</span><span class="typ">BuyerClient</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> com</span><span class="pun">.</span><span class="pln">greendizer</span><span class="pun">.</span><span class="pln">api</span><span class="pun">.</span><span class="pln">resource</span><span class="pun">.</span><span class="pln">buyer</span><span class="pun">.</span><span class="typ">Buyer</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> com</span><span class="pun">.</span><span class="pln">greendizer</span><span class="pun">.</span><span class="pln">api</span><span class="pun">.</span><span class="pln">resource</span><span class="pun">.</span><span class="typ">Settings</span><span class="pun">;</span><span class="pln">
+
+</span><span class="com">//Initialize a BuyerClient instance</span><span class="pln">
+</span><span class="typ">Buyer</span><span class="pln"> buyer </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">BuyerClient</span><span class="pun">(</span><span class="str">"oauth_token"</span><span class="pun">).</span><span class="pln">getUser</span><span class="pun">();</span><span class="pln">
+
+</span><span class="typ">Settings</span><span class="pln"> settings </span><span class="pun">=</span><span class="pln"> buyer</span><span class="pun">.</span><span class="pln">getSettings</span><span class="pun">();</span><span class="pln">
+
+</span><span class="com">//Print elements of the user-defined settings</span><span class="pln">
+</span><span class="typ">System</span><span class="pun">.</span><span class="pln">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">settings</span><span class="pun">.</span><span class="pln">getLanguage</span><span class="pun">());</span></code></pre>
+
+<pre class="prettyprint rounded-top tab-panel" style="padding-bottom: 38px; display: none; "><code class="language-js"><span class="pln">application</span><span class="pun">.</span><span class="pln">init</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">state</span><span class="pun">,</span><span class="pln"> error</span><span class="pun">){</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">state</span><span class="pun">){</span><span class="pln">
+        </span><span class="com">//A resource can be loaded without retrieving its parents.</span><span class="pln">
+        application</span><span class="pun">.</span><span class="pln">getUser</span><span class="pun">().</span><span class="pln">getSettings</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">settings</span><span class="pun">){</span><span class="pln">
+            </span><span class="com">//Print elements of the user-defined settings</span><span class="pln">
+            console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">settings</span><span class="pun">.</span><span class="pln">getLanguage</span><span class="pun">());</span><span class="pln">
+        </span><span class="pun">});</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+</div>
+</div>
+</section></article>
+<article class="content-item"><section class="content">
+<h3 id="references">References</h3>
+<div>
+<p>Depending on the context, you will either work with a <code>BuyerClient</code> or a <code>SellerClient</code>. In each case, you will have access to resources and collections using specific methods.</p>
+<span>To find out how to use these clients, follow one these links:</span>
+<br>
+<p style="margin-top:30px"><a href="https://www.greendizer.com/docs/libraries/buyers/">» Buyers reference</a></p>
+<p style="margin-top:30px"><a href="https://www.greendizer.com/docs/libraries/sellers/">» Sellers reference</a></p>
+</div>
+</section></article>
+<article class="content-item"><section class="content">
+<h3 id="notes">Notes</h3>
+<div>
+<p>Version: 2.1</p>
+<p>Last update: Feb 6<sup>th</sup>, 2012.</p>
+<p>Contact: <a href="mailto:developers@greendizer.com">developers@greendizer.com</a></p>
+</div>
+</section></article>
+</section>
+</section>
+<script type="text/javascript">
+(function(){var instance = greendizer.website.Context.getInstance();(window.GREENDIZER_PROTECTED !== false) && instance.login();})();
+("prettyPrint" in window) && prettyPrint();
+</script>
+<div id="push"></div>
+</div>
+<footer>
+<div id="pre-footer">
+<ol id="breadcrumbs" class="footer">
+<li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb" title="Home"><a itemprop="url" href="https://www.greendizer.com/"><img style="vertical-align: text-bottom; width:16px; height:16px;" alt="Home" src="./Libraries cookbook - Greendizer_files/gd16bw.png"></a></li>
+<li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="https://www.greendizer.com/docs/"><span itemprop="title">Documentation and Resources</span></a></li>
+<li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="./Libraries cookbook - Greendizer_files/Libraries cookbook - Greendizer.htm"><span itemprop="title">Libraries</span></a></li>
+<li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="./Libraries cookbook - Greendizer_files/Libraries cookbook - Greendizer.htm"><span itemprop="title">Basics</span></a></li>
+</ol>
+</div>
+<nav>
+<section>
+<h1>Product</h1>
+<ul>
+<li><a title="Back to the home page" href="https://www.greendizer.com/">Home</a></li>
+<li><a title="Explore the amazing features of Greendizer" href="https://www.greendizer.com/features/">Features</a></li>
+<li><a title="More about our pricing" href="https://www.greendizer.com/pricing/">Pricing</a></li>
+<li><a title="Visit our support site" href="http://support.greendizer.com/">Support</a></li>
+</ul>
+</section>
+<section>
+<h1>Docs</h1>
+<ul>
+<li><a title="Get started with our REST API, libs, widgets and tools to build apps." hreflang="en" href="https://www.greendizer.com/docs/">Get started</a></li>
+<li><a title="REST API reference" hreflang="en" href="https://www.greendizer.com/docs/api/">API</a></li>
+<li><a title="Invoicing and invoice-querying helper libs in languages like Python, Java, PHP and more" hreflang="en" href="./Libraries cookbook - Greendizer_files/Libraries cookbook - Greendizer.htm">Libraries</a></li>
+<li><a title="Powerful widgets to get the most out of Greendizer" hreflang="en" href="https://www.greendizer.com/docs/widgets/">Widgets</a></li>
+</ul>
+</section>
+<section>
+<h1>Company</h1>
+<ul>
+<li><a title="More about the company, the team and how to connect with both" href="https://www.greendizer.com/company/">About Greendizer</a></li>
+<li><a title="Check out our blog for news, discussions and new features" href="https://www.greendizer.com/blog/">Blog</a></li>
+<li>
+<a target="_blank" title="Join us on Google+" href="https://plus.google.com/118361734809275351334">Google+</a>
+<div id="___plusone_1" style="height: 15px; width: 70px; display: inline-block; text-indent: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: transparent; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; background-position: initial initial; background-repeat: initial initial; "><iframe allowtransparency="true" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="width: 70px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; height: 15px; position: static; left: 0px; top: 0px; visibility: visible; " tabindex="0" vspace="0" width="100%" id="I2_1336094251658" name="I2_1336094251658" src="./Libraries cookbook - Greendizer_files/fastbutton.htm" title="+1"></iframe></div>
+</li>
+<li>
+<a target="_blank" title="Interact with Greendizer on Facebook" href="http://www.facebook.com/greendizer/">Facebook</a>
+</li>
+<li><a target="_blank" title="Follow Greendizer on Twitter" href="http://twitter.com/greendizer/">Twitter</a></li>
+</ul>
+</section>
+<section>
+<h1>Policies</h1>
+<ul>
+<li><a title="Terms of use of Greendizer" hreflang="en" href="https://www.greendizer.com/tos/">Terms of service</a></li>
+</ul>
+</section>
+<section class="text">
+<img width="92" height="92" alt="Greendizer" src="./Libraries cookbook - Greendizer_files/gd_dark.png">
+<p id="sitemap-link"><a title="Greendizer.com Site Map" href="https://www.greendizer.com/sitemap/">Site map</a></p>
+<p>©2012 - All rights reserved.</p>
+</section>
+<div class="clear"></div>
+</nav>
+</footer>
+<script type="text/javascript">
+            (function() {
+                window.___gcfg = {
+                    lang: 'en',
+                    parsetags: 'onload'
+                };
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+              })();
+        </script>
+
+
+<table cellspacing="0" cellpadding="0" style="display: none; position: absolute; top: 360px; width: 962px; left: 149px; " class="gstl_0 gssb_c"><tbody><tr><td class="gssb_f"></td><td class="gssb_e" style="width: 100%; "></td></tr></tbody></table></body></html>
