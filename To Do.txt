@@ -1,0 +1,6 @@
+Soufiane :
+  - Chercher les applications mobiles similaires
+  - Classer ces applications par ordre
+  - Tester les applications mobiles
+  - Tester GreenDizer
+  
