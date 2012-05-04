@@ -1,10 +1,10 @@
 Soufiane :
+  - Créer des comptes sur GreenDizer:
+    - Buyer : gdoidbuyer@yopmail.com 
+    - Seller : gdoidseller@yopmail.com 
   - Chercher les applications mobiles similaires
     - https://play.google.com/store/search?q=invoice&c=apps
   - Classer ces applications par ordre
   - Tester les applications mobiles
   - Tester GreenDizer
   - Fonctionnalités à faire sur l'application
-  - Créer des comptes sur GreenDizer:
-    - Buyer : gdoidbuyer@yopmail.com 
-    - Seller : gdoidseller@yopmail.com 
