@@ -1,5 +1,7 @@
 package com.greendizer.api.net;
 
+import android.util.Log;
+
 
 /**
  * Represents a content range response header.
@@ -17,7 +19,7 @@ public class ContentRange {
    * @return Newly created {@code ContentRange} based on the parsed string.
    */
   public static ContentRange parse(String raw) {
-    String type = raw.substring(0, raw.indexOf("="));
+    String type = raw.substring(0, raw.indexOf(" "));
     int hyphen = raw.indexOf("-");
     int slash = raw.indexOf("/");
     Integer first = Integer.parseInt(raw.substring(type.length() + 1, hyphen));

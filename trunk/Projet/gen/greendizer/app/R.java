@@ -13,25 +13,38 @@ public final class R {
     public static final class drawable {
         public static final int background=0x7f020000;
         public static final int backrepeat=0x7f020001;
-        public static final int customers=0x7f020002;
-        public static final int directory=0x7f020003;
-        public static final int ic_launcher=0x7f020004;
-        public static final int invoice=0x7f020005;
-        public static final int message=0x7f020006;
-        public static final int myborder=0x7f020007;
-        public static final int products=0x7f020008;
-        public static final int stats=0x7f020009;
+        public static final int ic_launcher=0x7f020002;
+        public static final int myborder=0x7f020003;
+        public static final int mydirectory=0x7f020004;
+        public static final int myinvoice=0x7f020005;
+        public static final int mymessage=0x7f020006;
+        public static final int mystat=0x7f020007;
     }
     public static final class id {
-        public static final int Email=0x7f050000;
-        public static final int LoginButton=0x7f050001;
-        public static final int Password=0x7f050002;
-        public static final int RememberLoginBox=0x7f050003;
-        public static final int Username=0x7f050004;
+        public static final int Email=0x7f050002;
+        public static final int LoginButton=0x7f050003;
+        public static final int Menu1=0x7f05000d;
+        public static final int Password=0x7f050004;
+        public static final int RememberLoginBox=0x7f050005;
+        public static final int ScrollView01=0x7f050000;
+        public static final int Username=0x7f050006;
+        public static final int buttonDirectory=0x7f050009;
+        public static final int buttonInvoices=0x7f05000e;
+        public static final int buttonMessages=0x7f050010;
+        public static final int buttonStatistics=0x7f05000b;
+        public static final int edittext=0x7f050008;
+        public static final int line=0x7f050007;
+        public static final int menuDirectory=0x7f05000a;
+        public static final int menuInvoices=0x7f05000f;
+        public static final int menuMessages=0x7f050011;
+        public static final int menuStatistics=0x7f05000c;
+        public static final int myTableLayout=0x7f050001;
     }
     public static final class layout {
-        public static final int main=0x7f030000;
-        public static final int menu=0x7f030001;
+        public static final int invoices=0x7f030000;
+        public static final int main=0x7f030001;
+        public static final int maindialog=0x7f030002;
+        public static final int menu=0x7f030003;
     }
     public static final class string {
         public static final int app_name=0x7f040001;

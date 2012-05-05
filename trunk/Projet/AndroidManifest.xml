@@ -20,6 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Menu"></activity>
+        <activity android:name=".Invoices"></activity>
+        <activity android:name=".Messages"></activity>
     </application>
 
 </manifest>
