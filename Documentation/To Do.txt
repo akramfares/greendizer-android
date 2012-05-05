@@ -4,7 +4,42 @@ Soufiane :
     - Seller : gdoidseller@yopmail.com => qgNFcCs3
   - Chercher les applications mobiles similaires
     - https://play.google.com/store/search?q=invoice&c=apps
-  - Classer ces applications par ordre
+  - Classer ces applications par ordre 
   - Tester les applications mobiles
   - Tester GreenDizer
   - Fonctionnalités à faire sur l'application
+
+
+Applications mobiles :
+
+https://play.google.com/store/apps/details?id=com.imsunny.android.mobilebiz.pro&feature=search_result#t=W251bGwsMSwxLDEsImNvbS5pbXN1bm55LmFuZHJvaWQubW9iaWxlYml6LnBybyJd
+
+https://play.google.com/store/apps/details?id=com.reksaneb.invoicepro&feature=search_result#?t=W251bGwsMSwxLDEsImNvbS5yZWtzYW5lYi5pbnZvaWNlcHJvIl0.
+
+https://play.google.com/store/apps/details?id=com.itsabouttime.trial&feature=search_result#?t=W251bGwsMSwxLDEsImNvbS5pdHNhYm91dHRpbWUudHJpYWwiXQ..
+
+https://play.google.com/store/apps/details?id=com.zariftech.simpleinvoice&feature=search_result#?t=W251bGwsMSwxLDEsImNvbS56YXJpZnRlY2guc2ltcGxlaW52b2ljZSJd
+
+https://play.google.com/store/apps/details?id=com.dscapps.cmnv&feature=search_result#?t=W251bGwsMSwxLDEsImNvbS5kc2NhcHBzLmNtbnYiXQ..
+
+https://play.google.com/store/apps/details?id=Apps.ExpressProjects&feature=search_result#?t=W251bGwsMSwxLDEsIkFwcHMuRXhwcmVzc1Byb2plY3RzIl0.
+
+https://play.google.com/store/apps/details?id=com.expectar.gaspol&feature=search_result#?t=W251bGwsMSwxLDEsImNvbS5leHBlY3Rhci5nYXNwb2wiXQ..
+
+https://play.google.com/store/apps/details?id=de.eing.timetracker&feature=search_result#?t=W251bGwsMSwxLDEsImRlLmVpbmcudGltZXRyYWNrZXIiXQ..
+
+https://play.google.com/store/apps/details?id=com.jobbile.androidpro&feature=search_result#?t=W251bGwsMSwxLDEsImNvbS5qb2JiaWxlLmFuZHJvaWRwcm8iXQ..
+
+https://play.google.com/store/apps/details?id=com.phonegap.crmonmaps&feature=search_result#?t=W251bGwsMSwxLDEsImNvbS5waG9uZWdhcC5jcm1vbm1hcHMiXQ..
+
+https://play.google.com/store/apps/details?id=com.oocl.oocllite&feature=search_result#?t=W251bGwsMSwxLDEsImNvbS5vb2NsLm9vY2xsaXRlIl0.
+
+https://play.google.com/store/apps/details?id=air.com.easySoftwareSolutions.timeshEASY&feature=search_result#?t=W251bGwsMSwxLDEsImFpci5jb20uZWFzeVNvZnR3YXJlU29sdXRpb25zLnRpbWVzaEVBU1kiXQ..
+
+https://play.google.com/store/apps/details?id=com.viciousbytes.studiotab&feature=search_result#?t=W251bGwsMSwxLDEsImNvbS52aWNpb3VzYnl0ZXMuc3R1ZGlvdGFiIl0.
+
+https://play.google.com/store/apps/details?id=froid.root&feature=search_result#?t=W251bGwsMSwxLDEsImZyb2lkLnJvb3QiXQ..
+
+https://play.google.com/store/apps/details?id=com.yardi.payscan&feature=search_result#?t=W251bGwsMSwxLDEsImNvbS55YXJkaS5wYXlzY2FuIl0.
+
+https://play.google.com/store/apps/details?id=com.chrome.opsbuyer&feature=search_result#?t=W251bGwsMSwxLDEsImNvbS5jaHJvbWUub3BzYnV5ZXIiXQ..
