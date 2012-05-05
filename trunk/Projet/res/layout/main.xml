@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
+        android:orientation="vertical" android:layout_width="fill_parent"
+        android:layout_height="fill_parent" android:gravity="center_horizontal"
+        android:paddingLeft="20dp" android:paddingRight="20dp"
+        android:background="@drawable/backrepeat"
+        android:paddingTop="60dp">"
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello" />
+
+        <EditText android:id="@+id/Email" android:nextFocusUp="@+id/LoginButton"
+                android:nextFocusDown="@+id/Password" android:hint="Email"
+                android:inputType="textNoSuggestions" android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        <EditText android:id="@+id/Password" android:hint="Password"
+                android:inputType="textPassword" android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+        <Button android:text="Login" android:id="@+id/LoginButton"
+                android:nextFocusUp="@+id/RememberLoginBox" android:nextFocusDown="@+id/Username"
+                android:textSize="20sp" android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/myborder" 
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginTop="8dp"
+                android:textColor="#007700"
+                ></Button>
 
 </LinearLayout>
