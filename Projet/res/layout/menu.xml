@@ -1,19 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="fill_parent"
-        android:layout_height="fill_parent" android:gravity="center_horizontal"
-        android:paddingLeft="20dp" android:paddingRight="20dp"
-        android:background="@drawable/backrepeat"
-        android:paddingTop="60dp">"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backrepeat"
+    android:baselineAligned="false"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
 
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/backrepeat"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingLeft="50dp"
+        android:paddingRight="20dp"
+        android:paddingTop="60dp" >
 
         <LinearLayout
-      android:orientation="horizontal"
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent"
-      android:layout_weight="1">
-		
-        
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+				<LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_centerInParent="true"
+	            android:layout_weight="1"
+	            android:orientation="vertical" >
+		            <ImageButton
+		                android:layout_width="80dp"
+		                android:layout_height="80dp"
+		                android:src="@drawable/mydirectory" 
+		                android:id="@+id/buttonDirectory"/>
+		            <TextView
+			        android:id="@+id/menuDirectory"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="My Directory"
+			        />
+				</LinearLayout>
+	            <LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_centerInParent="true"
+	            android:layout_weight="1"
+	            android:orientation="vertical" >
+		            <ImageButton
+		                android:layout_width="80dp"
+		                android:layout_height="80dp"
+		                android:src="@drawable/mystat" 
+		                android:id="@+id/buttonStatistics"/>
+		            <TextView
+		                android:gravity="center_horizontal"
+			        android:id="@+id/menuStatistics"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="Statistics"
+			        />
+				</LinearLayout>
+	            
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Menu1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_centerInParent="true"
+	            android:layout_weight="1"
+	            android:orientation="vertical" >
+		            <ImageButton
+		                android:layout_width="80dp"
+		                android:layout_height="80dp"
+		                android:src="@drawable/myinvoice" 
+		                android:id="@+id/buttonInvoices"
+		                />
+		            <TextView
+			        android:id="@+id/menuInvoices"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="Invoices (0)"
+			        />
+				</LinearLayout>
+
+            <LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_centerInParent="true"
+	            android:layout_weight="1"
+	            android:orientation="vertical" >
+		            <ImageButton
+		                android:layout_width="80dp"
+		                android:layout_height="80dp"
+		                android:src="@drawable/mymessage" 
+		                android:id="@+id/buttonMessages"/>
+		            <TextView
+			        android:id="@+id/menuMessages"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="Messages"/>
+				</LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

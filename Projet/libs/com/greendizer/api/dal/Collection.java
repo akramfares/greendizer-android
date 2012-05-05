@@ -8,6 +8,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import android.util.Log;
+
 import com.greendizer.api.client.APIException;
 import com.greendizer.api.net.ContentRange;
 import com.greendizer.api.net.ETag;
